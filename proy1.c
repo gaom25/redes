@@ -4,10 +4,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+void procpadre(int argc, char *argv[]);
+void titulo_pal(int argc, char *argv[]);
+int comprobacion(int argc, char *argv[]);
+
 int main (int argc, char *argv[])
 {
 	
-
 /* n es el numero de procesos concurrentes */
 int i,j;
 int n = 0;
@@ -70,28 +73,36 @@ int comprobacion(int argc, char *argv[])
 	
 	// Comprobar que n > 0 int num=(int)(argv[3]);
 	
-}	
-
-/*void procpadre() // Como argumento deberia ir el nombre del archivo
+}
+	
+/* Funcion del proceso padre */
+void procpadre(int argc, char *argv[])
 {
 	/* El padre abrira el archivo y leera las palabras a buscar */
 
-	/* El archivo que se vaya a pasar habria que sacarlo del arreglo de
-	argumentos */
+	FILE *fd;
+	char palabras[50];
+	
+	// Nombre del archivo que contiene las palabras quedara en titulo[]
+	int i;
+	char titulo[20];
+	for(i=1; i<=argc; i++)
+	{
+		if (strcmp(argv[i],"-f") == 0)
+		{
+			strcpy(titulo, argv[i+1]);
+		}
+	}
 
-/*	FILE *fd;
-	char palabras[200];
-
-	fd=fopen(“palabras.txt”, "r");
+	fd=fopen(titulo, "r");
 	if (fd==NULL){
-		//perror("No se pudo abrir el archivo");
-		print("No se pudo abrir el archivo");
+		printf("No se pudo abrir el archivo");
 		exit(1);
 	}
 	
 	// Mientras no haya finalizado el archivo, sigue leyendo
 	while(feof(fd)!=0){
-		fgets(palabras, 200, fd); // El peo es que guarda tambien el \n, ¿como se evita?
-		// Aqui iria una llamada a lo que hace los hijos
+		fscanf(fd, "%s", palabras);
+		// Aqui iria una llamada a lo que hace los hijos, pasandole la palabra
 	}	
-}*/
+}		
