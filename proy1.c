@@ -138,8 +138,15 @@ int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;
 	char entrada[50], pal_archivo[50];
-	int i=0;
+	int i=0, pidh, pidp;
 	
+	if (strcmp(palabras, "NOMAS") == 0) {
+		pidh = getpid();
+		pidp = getppid();
+		printf("Mi PID es %d, el PID de mi padre es %d", pidh, pidp);
+		// FALTARIA IMPRIMIR TODAS LAS PALABRAS QUE BUSCO
+	}	
+		
 	/* Obtiene el archivo de entrada y lo abre*/
 	strcpy(entrada, argv[argc-2]);
 		
@@ -153,8 +160,7 @@ int prochijo(int argc, char *argv[], char palabras[])
 	 * enviada por el padre */
 	while(!feof(fd)) {
 		fscanf(fd, "%s", pal_archivo);
-		if (strcmp(pal_archivo, palabras) == 0)
-		{
+		if (strcmp(pal_archivo, palabras) == 0) {
 			i++;
 		}
 	}	
