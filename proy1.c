@@ -36,27 +36,28 @@ void comprobacion(int argc, char *argv[])
 			printf("-h es excluyente de las otras opciones\n");
 			exit(1);
 		}
-	}
+	}else{
 	
-	int i;
-	for(i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-f") == 0 || strcmp(argv[i],"-w") == 0 ) {
-			if (argv[i+2] == NULL) {
-				printf("Falta archivo de entrada\n");
-				exit(1);
-			} else {
-				if (strcmp(argv[i+2],"-w") == 0 || strcmp(argv[i+2],"-f") == 0) {
-					printf("Las opciones -w y -f son excluyentes\n");
+		int i;
+		for(i = 1; i < argc; i++) {
+			if (strcmp(argv[i],"-f") == 0 || strcmp(argv[i],"-w") == 0 ) {
+				if (argv[i+2] == NULL) {
+					printf("Falta archivo de entrada\n");
 					exit(1);
-				}
-			}	
+				} else {
+					if (strcmp(argv[i+2],"-w") == 0 || strcmp(argv[i+2],"-f") == 0) {
+						printf("Las opciones -w y -f son excluyentes\n");
+						exit(1);
+					}
+				}	
+			}
 		}
-	}
 
-	int num = atoi(argv[2]);
-	if (num < 1) {
-		printf("n debe ser un entero mayor o igual que 1\n");
-		exit(1);
+		int num = atoi(argv[2]);
+		if (num < 1) {
+			printf("n debe ser un entero mayor o igual que 1\n");
+			exit(1);
+		}
 	}	
 	
 }
