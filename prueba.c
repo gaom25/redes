@@ -4,109 +4,32 @@
 #include <string.h>
 #include <stdlib.h>
 
-void procpadre(int argc, char *argv[]);
-void titulo_pal(int argc, char *argv[]);
-void comprobacion(int argc, char *argv[]);
 int prochijo(int argc, char *argv[], char palabras[]);
 
-int main (int argc, char *argv[])
-{
-	 
-comprobacion(argc, argv);
-procpadre(argc, argv);
+int main (int argc, char *argv[]) {
 
-printf("args: %d \n", argc);
-printf("array[0]: %s \n", argv[0]);
-printf("array[1]: %s \n", argv[1]);
-printf("array[2]: %s \n", argv[2]);
-printf("arch entrada: %s \n", argv[argc-2]);
-
-}
-
-/* Funcion que comprueba el pase de argumentos */
-void comprobacion(int argc, char *argv[])
-{
-	
-	if (!(argc > 1 && argc < 9)) {
-		
-		printf("Numero de argumentos invalidos\n");
-		exit(1);
-	}
-	
-	if(strcmp(argv[1],"-h") == 0) {
-		if ((argv[2]) != NULL) {
-			printf("-h es excluyente de las otras opciones\n");
-			exit(1);
-		}
-	}
-	
-	int i;
-	for(i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-f") == 0 || strcmp(argv[i],"-w") == 0 ) {
-			if (argv[i+2] == NULL) {
-				printf("Falta archivo de entrada\n");
-				exit(1);
-			} else {
-				if (strcmp(argv[i+2],"-w") == 0 || strcmp(argv[i+2],"-f") == 0) {
-					printf("Las opciones -w y -f son excluyentes\n");
-					exit(1);
-				}
-			}	
-		}
-	}
-
-	int num = atoi(argv[2]);
-	if (num < 1) {
-		printf("n debe ser un entero mayor o igual que 1\n");
-		exit(1);
-	}	
-	
-}
-	
-/* Funcion del proceso padre */
-void procpadre(int argc, char *argv[])
-{
 	FILE *fd;
 	char palabras[50], titulo[50], pal_buscar[50];
-	char *palabras[50]
 	int filed[2];
-	int i, n, hpid, num;
-		
-	/* Nombre del archivo que contiene las palabras queda en titulo[]*/
+	int i, n=2, hpid, num;
+
+	/* Busca el archivo de las palabras */
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i],"-f") == 0) {
 			strcpy(titulo, argv[i+1]);
 		}
 	}
 	
-	/* Numero de procesos concurrentes */
-	for (i = 1; i < argc; i++) {	
-		if (strcmp(argv[i],"-n") == 0) {
-			n = atoi(argv[i+1]);
-		} else {
-			n = 1;
-		}	
-	}	
-
-	/* Abre el archivo de palabras a buscar*/
 	fd = fopen(titulo, "r");
 	if (fd == NULL) {
 		printf("No se pudo abrir el archivo\n");
 		exit(1);
 	}
-			
 	
-	/* El proceso padre comienza a leer las palabras y las guarda en 
-	 * una estructura */
 	while(!feof(fd)) {
 		fscanf(fd, "%s", palabras);
-		
-	}
-	
-	
-	
-	/* Accede a la estructura para buscar las palabras */
-	for(i=0; i<n; i++) {
+		printf("la palabra: %s \n", palabras);
+		//for(i=0; i<n; i++) {
 			hpid=fork();
 			if (hpid < 0) {
 				printf("Error al crear el proceso hijo\n");
@@ -128,15 +51,16 @@ void procpadre(int argc, char *argv[])
 				 * EL MISMO QUE USO PARA RECIBIR LA PALABRA DEL PADRE, NI SE
 				 * COMO HACER PARA QUE EL PADRE LEA LA PALABRA ENVIADA POR EL HIJO */
 				num = prochijo(argc, argv, pal_buscar);
+				//printf("las veces que sale %s es %d \n", pal_buscar, num);
 				/* SERIA ESCRIBIR num EN UN PIPE Y QUE EL PADRE LO LEA */
 						
 			}			
-		}		
-}		
+		//}
+	}
+	
+	
+}
 
-/* Funcion del proceso hijo */
-/* NO SE SI DEBERIA HACERSE ASI, RETORNANDO UN ENTERO QUE ES EL NUMERO
- * DE VECES QUE ENCONTRO LA PALABRA */
 int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;
@@ -169,4 +93,4 @@ int prochijo(int argc, char *argv[], char palabras[])
 	}	
 	
 	return i;
-}
+}	
