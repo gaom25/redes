@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include "lista.h"
 
 void procpadre(int argc, char *argv[]);
 void titulo_pal(int argc, char *argv[]);
@@ -68,10 +69,10 @@ void comprobacion(int argc, char *argv[])
 void procpadre(int argc, char *argv[])
 {
 	FILE *fd;
-	char palabras[50], titulo[50], pal_buscar[50];
-	char *palabras[50]
-	int filed[2];
+	Lista *cb;
+	char palabras[50], titulo[50], pal_buscar[50],num_veces[5];
 	int i, n, hpid, num;
+	int **ph, **pp;
 		
 	/* Nombre del archivo que contiene las palabras queda en titulo[]*/
 	for (i = 1; i < argc; i++) {
@@ -99,45 +100,53 @@ void procpadre(int argc, char *argv[])
 	
 	/* El proceso padre comienza a leer las palabras y las guarda en 
 	 * una estructura */
+	
+	fscanf(fd, "%s", pal_buscar);
 	while(!feof(fd)) {
-		fscanf(fd, "%s", palabras);
-		
+		insertar(pal_buscar,cb);
+		fscanf(fd, "%s", pal_buscar);
 	}
 	
+	/* Crea los pipes para la comunicacion entre padre e hijos */
 	
+	ph = (int **)malloc(n * sizeof(int *));  
+	for(i = 0 ; i < n ; i++) {
+		ph[i] = (int *)malloc (2 * sizeof(int));
+	}		
+	
+	pp = (int **)malloc(n * sizeof(int *));  
+	for(i = 0 ; i < n ; i++) {
+		pp[i] = (int *)malloc (2 * sizeof(int));
+	}		
 	
 	/* Accede a la estructura para buscar las palabras */
 	for(i=0; i<n; i++) {
-			hpid=fork();
-			if (hpid < 0) {
-				printf("Error al crear el proceso hijo\n");
-				exit(1);
-			}
-			if (hpid != 0) {	// Si es el proceso padre
-				pipe(filed);
-				close(filed[0]);
-				write(filed[1], palabras, strlen(palabras) + 1);
-				close(filed[1]);
+		hpid=fork();
+		if (hpid < 0) {
+			printf("Error al crear el proceso hijo\n");
+			exit(1);
+		}
+			
+		if (hpid != 0) {	// Si es el proceso padre
+			agrpal(cb,ph,i);
+			close(pp[i][1]);
+			read(pp[i][0], num_veces, 50);
+			close(pp[i][0]);
+			//escribir(argc, argv, num_veces);
 			} else {		// Si es el proceso hijo
-				close(filed[1]);
-				read(filed[0], pal_buscar, 50);
-				close(filed[0]);
+				close(ph[i][1]);
+				read(ph[i][0], palabras, 50);
+				close(ph[i][0]);
+				printf("%s\n",palabras);
 				
-				/* NO SE SI PONER QUE LA FUNCION DEL HIJO RETORNE EL NUMERO DE 
-				 * VECES QUE ENCONTRO LA PALABRA Y LUEGO ENVIARSELA AQUI
-				 * POR UN PIPE AL PROCESO PADRE, PERO NO SE SI ESE PIPE ES
-				 * EL MISMO QUE USO PARA RECIBIR LA PALABRA DEL PADRE, NI SE
-				 * COMO HACER PARA QUE EL PADRE LEA LA PALABRA ENVIADA POR EL HIJO */
-				num = prochijo(argc, argv, pal_buscar);
-				/* SERIA ESCRIBIR num EN UN PIPE Y QUE EL PADRE LO LEA */
-						
+				num = prochijo(argc, argv, palabras);
+				sprintf(num_veces[0],"/d",num);
 			}			
 		}		
 }		
 
 /* Funcion del proceso hijo */
-/* NO SE SI DEBERIA HACERSE ASI, RETORNANDO UN ENTERO QUE ES EL NUMERO
- * DE VECES QUE ENCONTRO LA PALABRA */
+
 int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;
