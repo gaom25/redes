@@ -204,6 +204,7 @@ int prochijo(int argc, char *argv[], char palabras[])
 		printf("No se pudo abrir el archivo\n");
 		exit(1);
 	}
+<<<<<<< HEAD
 	
 	/* Lee las palabras del archivo y las compara con la palabra a buscar
 	 * enviada por el padre */
@@ -217,3 +218,5 @@ int prochijo(int argc, char *argv[], char palabras[])
 	
 	return i;
 }
+=======
+>>>>>>> eb7519ba847001de4e714a63c2d25a1e44777961

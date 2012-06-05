@@ -24,7 +24,6 @@ void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuev
 	     strcpy(new->nombre, palabras);
 	     new->proximo = NULL;
 		 
-	     
 	     if (prox == NULL) {
 	        *L = new; 
 		} else {
