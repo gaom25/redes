@@ -70,7 +70,7 @@ void procpadre(int argc, char *argv[])
 {
 	FILE *fd;
 	Lista *cb;
-	char palabras[50], titulo[50], pal_buscar[50],num_veces[5];
+	char palabras[50], titulo[50], pal_buscar[50],num_veces[50];
 	int i, n, hpid, num;
 	int **ph, **pp;
 		
@@ -89,7 +89,7 @@ void procpadre(int argc, char *argv[])
 			n = 1;
 		}	
 	}	
-
+	
 	/* Abre el archivo de palabras a buscar*/
 	fd = fopen(titulo, "r");
 	if (fd == NULL) {
@@ -140,7 +140,7 @@ void procpadre(int argc, char *argv[])
 				printf("%s\n",palabras);
 				
 				num = prochijo(argc, argv, palabras);
-				sprintf(num_veces[0],"/d",num);
+				sprintf(num_veces,"%d",num);
 			}			
 		}		
 }		
