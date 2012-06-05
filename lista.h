@@ -35,10 +35,7 @@ void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuev
 		}
 }
 
-<<<<<<< HEAD
-/* */
-=======
->>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
+
 void agrpal (Lista **L, int mx[][2], int i)
 {
 		Lista *tmp;
