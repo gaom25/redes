@@ -19,7 +19,7 @@ void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuev
 	   new = (Lista *)malloc(sizeof (Lista));
 	   
 	   if (new == NULL) {							// Si la llamada al sistema retorna NULL es que la memoria 											esta llena y no puede albergas mas estructuras Estudiante
-	     printf("Memoria llena, no se pueden ingresar mas estudiantes\n");
+	     printf("Memoria llena\n");
 	   } else {
 	     strcpy(new->nombre, palabras);
 	     new->proximo = NULL;
@@ -36,7 +36,8 @@ void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuev
 		}
 }
 
-void agrpal (Lista **L, int *mx, int i)
+/* */
+void agrpal (Lista **L, int mx[][2], int i)
 {
 		Lista *tmp;
 		tmp = *L;
@@ -50,6 +51,5 @@ void agrpal (Lista **L, int *mx, int i)
 			close(mx[i][0]);
 			write(mx[i][1],"NOMAS",6);
 			close(mx[i][1]);
-			
 		}
 }			
