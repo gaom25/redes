@@ -11,10 +11,10 @@
    
 typedef struct est Lista;
 
-void insertar(char palabras[], Lista *L)				// Procedimiento para insertar nuevo Lista
+void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuevo Lista
 {
 	   Lista *new;
-	   Lista *prox = L;
+	   Lista *prox = *L;
 	   
 	   new = (Lista *)malloc(sizeof (Lista));
 	   
@@ -25,23 +25,31 @@ void insertar(char palabras[], Lista *L)				// Procedimiento para insertar nuevo
 	     new->proximo = NULL;
 		 
 	     if (prox == NULL) {
-	        prox = new; 
+	        *L = new; 
 		} else {
 			while ((prox->proximo) != NULL) {
 				prox = prox->proximo;
+				
 	       }
 	       prox->proximo = new;
 		}
 		}
 }
 
-void agrpal (Lista *L, int **mx, int i)
+void agrpal (Lista **L, int *mx, int i)
 {
 		Lista *tmp;
-		tmp = L;
-		close(mx[i][0]);
-		write(mx[i][1],L->nombre,strlen(L->nombre)+1);
-		close(mx[i][1]);
-		L = L->proximo;
-		free(tmp);
+		tmp = *L;
+		if(tmp != NULL) {
+			close(mx[i][0]);
+			write(mx[i][1],tmp->nombre,strlen(tmp->nombre)+1);
+			close(mx[i][1]);
+			*L = (*L)->proximo;
+			free(tmp);
+		}else{
+			close(mx[i][0]);
+			write(mx[i][1],"NOMAS",6);
+			close(mx[i][1]);
+			
+		}
 }			
