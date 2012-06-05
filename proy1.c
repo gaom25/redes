@@ -1,3 +1,6 @@
+/*falta hacer que el padre sepa cual palabra le paso a cada uno de sus hijos, que los hijos sepan cuales palabras les han 
+pasado, el pipe esta bien, y las pruebas*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -13,7 +16,7 @@ int prochijo(int argc, char *argv[], char palabras[]);
 int main (int argc, char *argv[])
 {
 	 
-//comprobacion(argc, argv);
+comprobacion(argc, argv);
 procpadre(argc, argv);
 
 /*printf("args: %d \n", argc);
@@ -70,9 +73,8 @@ void procpadre(int argc, char *argv[])
 	FILE *fd;
 	Lista *cb;
 	cb = NULL;
-	char palabras[50], titulo[50], pal_buscar[50],num_veces[5];
-	int i, n, hpid, num;
-	int **ph, **pp;
+	char palabras[50], titulo[50], pal_buscar[50],num_veces[50];
+	int i, n, hpid, num,status,pid_hijo;
 		
 	/* Nombre del archivo que contiene las palabras queda en titulo[]*/
 	for (i = 1; i < argc; i++) {
@@ -109,14 +111,16 @@ void procpadre(int argc, char *argv[])
 	
 	/* Crea los pipes para la comunicacion entre padre e hijos */
 	
-	ph = (int **)malloc(n * sizeof(int *));  
-	for(i = 0 ; i < n ; i++) {
-		ph[i] = (int *)malloc (2 * sizeof(int));
-	}		
+	int ph[n][2];  
+	int pp[n][2];
 	
-	pp = (int **)malloc(n * sizeof(int *));  
-	for(i = 0 ; i < n ; i++) {
-		pp[i] = (int *)malloc (2 * sizeof(int));
+	/*arreglo que determina que palabra fue pasada al proceso hijo, aun por trabajar*/
+	
+	char *procesos[n][2];
+	for(i = 0; i< n; i++) {
+		pipe(ph[i]);
+		pipe(pp[i]);
+		
 	}		
 	
 	/* Accede a la estructura para buscar las palabras */
@@ -128,19 +132,54 @@ void procpadre(int argc, char *argv[])
 		}
 			
 		if (hpid != 0) {	// Si es el proceso padre
-			agrpal(&cb,ph,i);
-			close(pp[i][1]);
-			read(pp[i][0], num_veces, 50);
-			close(pp[i][0]);
+			agrpal(&cb,&ph,i);
 			//escribir(argc, argv, num_veces);
-			} else {		// Si es el proceso hijo
+		} else {		// Si es el proceso hijo
+			num = 0;
+			while(num != -1) {				
 				close(ph[i][1]);
 				read(ph[i][0], palabras, 50);
 				close(ph[i][0]);
-				
+			
+				while(palabras == NULL) {
+					close(ph[i][1]);
+					read(ph[i][0], palabras, 50);
+					close(ph[i][0]);
+				}
 				num = prochijo(argc, argv, palabras);
-				sprintf(num_veces,"%d",num);
-			}			
+				
+				if(num != -1) {				
+					sprintf(num_veces,"%d",num);
+				
+					close(pp[i][1]);
+					write(pp[i][0], num_veces, sizeof(num_veces)+1);
+					close(pp[i][0]);
+				}
+			}
+		exit(0);
+		}			
+	}
+		
+		while((pid_hijo = wait(&status)) != -1){
+			/* buscar nueva palabra y pasarsela al hijo con ese pid_hijo, tambien revisar y
+			el exit del hijo fue exitoso y ver el numero de palabras que trajo*/
+			close(pp[i][1]);
+			read(pp[i][0], num_veces, 50);
+			close(pp[i][0]);
+			char c[] = "hola";
+			
+			int occur = atoi(num_veces);
+			
+			FILE * sld = fopen("salida.txt","a");
+			if(sld ==NULL) {
+				printf("nose pudo abrir el archivo\n");
+				break;	
+			}
+			fprintf(sld,"La cantidad de ocurrencias de la palabra %s es : %d\n",c,occur);
+			fclose(sld);
+					
+			agrpal(&cb,&ph,i);
+			
 		}		
 }		
 
@@ -150,7 +189,8 @@ int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;
 	char entrada[50], pal_archivo[50];
-	int i=0, pidh, pidp;
+	int i=0,j, pidh, pidp;
+	j = -1;
 	printf("%s\n",palabras);
 	
 	if (strcmp(palabras, "NOMAS") == 0) {
@@ -158,6 +198,7 @@ int prochijo(int argc, char *argv[], char palabras[])
 		pidp = getppid();
 		printf("Mi PID es %d, el PID de mi padre es %d", pidh, pidp);
 		// FALTARIA IMPRIMIR TODAS LAS PALABRAS QUE BUSCO
+		return j;
 	}	
 		
 	/* Obtiene el archivo de entrada y lo abre*/
