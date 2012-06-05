@@ -30,14 +30,13 @@ void insertar(char palabras[], Lista **L)				// Procedimiento para insertar nuev
 		} else {
 			while ((prox->proximo) != NULL) {
 				prox = prox->proximo;
-				
 	       }
 	       prox->proximo = new;
 		}
 		}
 }
 
-void agrpal (Lista **L, int *mx, int i)
+void agrpal (Lista **L, int mx[][2], int i)
 {
 		Lista *tmp;
 		tmp = *L;
