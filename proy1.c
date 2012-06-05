@@ -132,15 +132,20 @@ void procpadre(int argc, char *argv[])
 			
 		if (hpid != 0) {	// Si es el proceso padre
 			agrpal(&cb,ph,i);
+<<<<<<< HEAD
 			close(pp[i][1]);
 			read(pp[i][0], palabras, 50);
 			close(pp[i][0]);
+=======
+			//escribir(argc, argv, num_veces);
+>>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
 		} else {		// Si es el proceso hijo
 			num = 0;
-			while(num != -1) {				
-				close(ph[i][1]);
+			//while(num != -1) {	
+			sleep(0);			
 				read(ph[i][0], palabras, 50);
 				close(ph[i][0]);
+<<<<<<< HEAD
 			
 				/*while(palabras == NULL) {
 					close(ph[i][1]);
@@ -148,9 +153,15 @@ void procpadre(int argc, char *argv[])
 					close(ph[i][0]);
 				}*/
 				num = prochijo(argc, argv, palabras, pp);
+=======
+				close(ph[i][1]);
+	
+				num = prochijo(argc, argv, palabras);
+>>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
 				
 				/*if(num != -1) {				
 					sprintf(num_veces,"%d",num);
+<<<<<<< HEAD
 					close(pp[i][0]);
 					write(pp[i][1], num_veces, sizeof(num_veces)+1);
 					close(pp[i][1]);
@@ -163,6 +174,24 @@ void procpadre(int argc, char *argv[])
 			close(pp[i][1]);
 			read(pp[i][0], num_veces, 50);
 			close(pp[i][0]);
+=======
+				
+					close(pp[i][0]);
+					write(pp[i][1], num_veces, 50);
+					close(pp[i][1]);
+				}
+			//}
+		exit(0);
+		}			
+	}
+		
+		while((pid_hijo = wait(&status)) != -1){
+			/* buscar nueva palabra y pasarsela al hijo con ese pid_hijo, tambien revisar y
+			el exit del hijo fue exitoso y ver el numero de palabras que trajo*/
+			close(pp[0][1]);
+			read(pp[0][0], num_veces, 50);
+			close(pp[0][0]);
+>>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
 			char c[] = "hola";
 			
 			int occur = atoi(num_veces);
@@ -175,7 +204,11 @@ void procpadre(int argc, char *argv[])
 			fprintf(sld,"La cantidad de ocurrencias de la palabra %s es : %d\n",c,occur);
 			fclose(sld);
 					
+<<<<<<< HEAD
 			agrpal(&cb,ph,i);
+=======
+			agrpal(&cb,ph,0);
+>>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
 			
 			}*/		
 			exit(0);
@@ -193,12 +226,11 @@ void prochijo(int argc, char *argv[], char palabras[], int pp[][2])
 	char entrada[50], pal_archivo[50], num_veces[5];
 	int i=0,j, pidh, pidp;
 	j = -1;
-	printf("%s\n",palabras);
 	
 	if (strcmp(palabras, "NOMAS") == 0) {
 		pidh = getpid();
 		pidp = getppid();
-		printf("Mi PID es %d, el PID de mi padre es %d", pidh, pidp);
+		printf("Mi PID es %d, el PID de mi padre es %d\n", pidh, pidp);
 		// FALTARIA IMPRIMIR TODAS LAS PALABRAS QUE BUSCO
 		return j;
 	}	
@@ -211,6 +243,7 @@ void prochijo(int argc, char *argv[], char palabras[], int pp[][2])
 		printf("No se pudo abrir el archivo\n");
 		exit(1);
 	}
+<<<<<<< HEAD
 	
 	fscanf(fd, "%s", pal_archivo);
 	while(!feof(fd)) {
@@ -226,3 +259,21 @@ void prochijo(int argc, char *argv[], char palabras[], int pp[][2])
 	close(pp[i][1]);
 	
 }	
+=======
+<<<<<<< HEAD
+	
+	/* Lee las palabras del archivo y las compara con la palabra a buscar
+	 * enviada por el padre */
+	fscanf(fd, "%s", pal_archivo);
+	while(!feof(fd)) {
+		if (strcmp(pal_archivo, palabras) == 0) {
+			i++;
+		}
+		fscanf(fd, "%s", pal_archivo);
+	}	
+	
+	return i;
+}
+=======
+>>>>>>> eb7519ba847001de4e714a63c2d25a1e44777961
+>>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a
