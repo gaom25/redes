@@ -72,11 +72,10 @@ void procpadre(int argc, char *argv[])
 {
 	FILE *fd;
 	Lista *cb;
-
 	cb = NULL;
 	char palabras[50], titulo[50], pal_buscar[50],num_veces[50];
 	int i, n, hpid, num,status,pid_hijo;
-	
+		
 	/* Nombre del archivo que contiene las palabras queda en titulo[]*/
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i],"-f") == 0) {
@@ -92,7 +91,7 @@ void procpadre(int argc, char *argv[])
 			n = 1;
 		}	
 	}	
-	
+
 	/* Abre el archivo de palabras a buscar*/
 	fd = fopen(titulo, "r");
 	if (fd == NULL) {
@@ -142,10 +141,12 @@ void procpadre(int argc, char *argv[])
 				read(ph[i][0], palabras, 50);
 				close(ph[i][0]);
 			
+				while(palabras == NULL) {
+					close(ph[i][1]);
+					read(ph[i][0], palabras, 50);
+					close(ph[i][0]);
+				}
 				num = prochijo(argc, argv, palabras);
-
-				sprintf(num_veces,"%d",num);
-			}			
 				
 				if(num != -1) {				
 					sprintf(num_veces,"%d",num);
@@ -157,6 +158,7 @@ void procpadre(int argc, char *argv[])
 			}
 		exit(0);
 		}			
+	}
 		
 		while((pid_hijo = wait(&status)) != -1){
 			/* buscar nueva palabra y pasarsela al hijo con ese pid_hijo, tambien revisar y
@@ -178,7 +180,6 @@ void procpadre(int argc, char *argv[])
 					
 			agrpal(&cb,&ph,i);
 			
-
 		}		
 }		
 
@@ -208,15 +209,3 @@ int prochijo(int argc, char *argv[], char palabras[])
 		printf("No se pudo abrir el archivo\n");
 		exit(1);
 	}
-	
-	/* Lee las palabras del archivo y las compara con la palabra a buscar
-	 * enviada por el padre */
-	while(!feof(fd)) {
-		fscanf(fd, "%s", pal_archivo);
-		if (strcmp(pal_archivo, palabras) == 0) {
-			i++;
-		}
-	}	
-	
-	return i;
-}
