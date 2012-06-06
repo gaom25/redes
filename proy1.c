@@ -57,13 +57,16 @@ void comprobacion(int argc, char *argv[])
 				}	
 			}
 		}
-
-		int num = atoi(argv[2]);
-		if (num < 1) {
-			printf("n debe ser un entero mayor o igual que 1\n");
-			exit(1);
-		}
 	}	
+
+		if (strcmp(argv[2],"-n") == 0)
+		{
+			int num = atoi(argv[2]);
+			if (num < 1) {
+				printf("n debe ser un entero mayor o igual que 1\n");
+				exit(1);
+			}
+		}	
 	
 }
 	
