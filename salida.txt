@@ -1,5 +1,4 @@
-<<<<<<< HEAD
+La cantidad de ocurrencias de la palabra hola es : 6
+La cantidad de ocurrencias de la palabra hola es : 6
+La cantidad de ocurrencias de la palabra hola es : 1
 La cantidad de ocurrencias de la palabra hola es : 0
-=======
-La cantidad de ocurrencias de la palabra hola es : 3
->>>>>>> 3c3b6dc1b73a7216bb51a696e7b672325d0bba5a

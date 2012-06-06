@@ -74,14 +74,23 @@ void procpadre(int argc, char *argv[])
 	Lista *cb;
 	cb = NULL;
 	char palabras[50], titulo[50], pal_buscar[50],num_veces[50];
-	int i, n, hpid, num,status,pid_hijo;
+	int i, n, hpid, num,status,pid_hijo, guardia=0;
 		
-	/* Nombre del archivo que contiene las palabras queda en titulo[]*/
+	/* Si se especifica la opcion -f, se obtiene el nombre del archivo
+	 * de donde se deben extraer las palabras */
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i],"-f") == 0) {
 			strcpy(titulo, argv[i+1]);
 		}
 	}
+	
+	/* Si se especifica la opcion -w, se obtiene la palabra a buscar */		
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-w") == 0) {
+			strcpy(pal_buscar, argv[i+1]);
+			guardia=1;
+		}
+	}		
 	
 	/* Numero de procesos concurrentes */
 	for (i = 1; i < argc; i++) {	
@@ -92,23 +101,25 @@ void procpadre(int argc, char *argv[])
 		}	
 	}	
 
-	/* Abre el archivo de palabras a buscar*/
-	fd = fopen(titulo, "r");
-	if (fd == NULL) {
-		printf("No se pudo abrir el archivo\n");
-		exit(1);
-	}
-			
-	
-	/* El proceso padre comienza a leer las palabras y las guarda en 
-	 * una estructura */
-	
-	fscanf(fd, "%s", pal_buscar);
-	while(!feof(fd)) {
-		insertar(pal_buscar,&cb);
+	/* Si se especifica la opcion -f */
+	if (guardia != 1) {
+		/* Abre el archivo de palabras a buscar*/
+		fd = fopen(titulo, "r");
+		if (fd == NULL) {
+			printf("No se pudo abrir el archivo\n");
+			exit(1);
+		}
+		
+		/* Se comienza a leer las palabras y se guardan en una 
+		 * estructura */
 		fscanf(fd, "%s", pal_buscar);
+		while(!feof(fd)) {
+			insertar(pal_buscar,&cb);
+			fscanf(fd, "%s", pal_buscar);
+		}	
 	}
 	
+		
 	/* Crea los pipes para la comunicacion entre padre e hijos */
 	
 	int ph[n][2];  
@@ -120,10 +131,9 @@ void procpadre(int argc, char *argv[])
 	for(i = 0; i< n; i++) {
 		pipe(ph[i]);
 		pipe(pp[i]);
-		
 	}		
 	
-	/* Accede a la estructura para buscar las palabras */
+	/* Se crean los n procesos hijos */
 	for(i=0; i<n; i++) {
 		hpid=fork();
 		if (hpid < 0) {
@@ -132,8 +142,14 @@ void procpadre(int argc, char *argv[])
 		}
 			
 		if (hpid != 0) {	// Si es el proceso padre
-			agrpal(&cb,ph,i);
-			//escribir(argc, argv, num_veces);
+			if (guardia != 1) {
+				agrpal(&cb,ph,i);
+			} else {
+				close(ph[i][0]);
+				write(ph[i][1],pal_buscar,strlen(pal_buscar)+1);
+				close(ph[i][1]);
+			}	
+						
 		} else {		// Si es el proceso hijo
 			num = 0;
 			//while(num != -1) {	
@@ -152,13 +168,15 @@ void procpadre(int argc, char *argv[])
 					close(pp[i][1]);
 				}
 			//}
-		exit(0);
-		}			
+			exit(0);
+		}
+		break;			
 	}
 		
+		/* El padre recibe del hijo el numero de veces que encontro la palabra
+		 * y busca la nueva palabra para pasarsela al hijo, revisando si el exit
+		 * del hijo fue existoso */
 		while((pid_hijo = wait(&status)) != -1){
-			/* buscar nueva palabra y pasarsela al hijo con ese pid_hijo, tambien revisar y
-			el exit del hijo fue exitoso y ver el numero de palabras que trajo*/
 			close(pp[0][1]);
 			read(pp[0][0], num_veces, 50);
 			close(pp[0][0]);
@@ -168,7 +186,7 @@ void procpadre(int argc, char *argv[])
 			
 			FILE * sld = fopen("salida.txt","a");
 			if(sld ==NULL) {
-				printf("nose pudo abrir el archivo\n");
+				printf("No se pudo abrir el archivo\n");
 				break;	
 			}
 			fprintf(sld,"La cantidad de ocurrencias de la palabra %s es : %d\n",c,occur);
