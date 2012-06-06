@@ -121,8 +121,7 @@ void procpadre(int argc, char *argv[])
 			fscanf(fd, "%s", pal_buscar);
 		}	
 	}
-	
-		
+			
 	/* Crea los pipes para la comunicacion entre padre e hijos */
 	
 	int ph[n][2];  
@@ -148,41 +147,42 @@ void procpadre(int argc, char *argv[])
 			if (guardia != 1) {
 				agrpal(&cb,ph,i);
 			} else {
-				close(ph[i][0]);
+				//close(ph[i][0]);
 				write(ph[i][1],pal_buscar,strlen(pal_buscar)+1);
-				close(ph[i][1]);
+				//close(ph[i][1]);
 			}	
 						
 		} else {		// Si es el proceso hijo
 			num = 0;
 			//while(num != -1) {	
-			sleep(0);			
-				read(ph[i][0], palabras, 50);
-				close(ph[i][0]);
-				close(ph[i][1]);
-	
-				num = prochijo(argc, argv, palabras);
+			sleep(0);
+			//close(ph[i][1]);
+			read(ph[i][0], palabras, 50);
+			//close(ph[i][0]);
+			//fflush(stdout);
 				
-				if(num != -1) {				
-					sprintf(num_veces,"%d",num);
+			num = prochijo(argc, argv, palabras);
 				
-					close(pp[i][0]);
-					write(pp[i][1], num_veces, 50);
-					close(pp[i][1]);
-				}
+			if(num != -1) {				
+				sprintf(num_veces,"%d",num);
+				
+				//close(pp[i][0]);
+				write(pp[i][1], num_veces, 50);
+				//close(pp[i][1]);
+			}
 			//}
 			exit(0);
 		}
-		break;			
+		//break;			
 	}
 		
 		/* El padre recibe del hijo el numero de veces que encontro la palabra
 		 * y busca la nueva palabra para pasarsela al hijo, revisando si el exit
 		 * del hijo fue existoso */
 		while((pid_hijo = wait(&status)) != -1){
-			close(pp[0][1]);
+			//close(pp[0][1]);
 			read(pp[0][0], num_veces, 50);
-			close(pp[0][0]);
+			//close(pp[0][0]);
 			char c[] = "hola";
 			
 			int occur = atoi(num_veces);
