@@ -7,6 +7,7 @@ pasado, el pipe esta bien, y las pruebas*/
 #include <string.h>
 #include <stdlib.h>
 #include "lista.h"
+#include "listap.h"
 
 void procpadre(int argc, char *argv[]);
 void titulo_pal(int argc, char *argv[]);
@@ -75,9 +76,11 @@ void procpadre(int argc, char *argv[])
 {
 	FILE *fd;
 	Lista *cb;
+	Listap *pal;
 	cb = NULL;
+	pal = NULL;
 	char palabras[50], titulo[50], pal_buscar[50],num_veces[50];
-	int i, n, hpid, num,status,pid_hijo, guardia=0;
+	int i, n, hpid, num,status,pid_hijo, guardia=0,pidh, pidp;
 		
 	/* Si se especifica la opcion -f, se obtiene el nombre del archivo
 	 * de donde se deben extraer las palabras */
@@ -148,30 +151,28 @@ void procpadre(int argc, char *argv[])
 			if (guardia != 1) {
 				agrpal(&cb,ph,i);
 			} else {
-				close(ph[i][0]);
 				write(ph[i][1],pal_buscar,strlen(pal_buscar)+1);
-				close(ph[i][1]);
 			}	
 						
 		} else {		// Si es el proceso hijo
 			num = 0;
-			//while(num != -1) {	
-			sleep(0);			
+			while(num != -1) {			
 				read(ph[i][0], palabras, 50);
-				close(ph[i][0]);
-				close(ph[i][1]);
-	
+				insertarp(palabras,getpid(),&pal);
+					
 				num = prochijo(argc, argv, palabras);
 				
-				if(num != -1) {				
+								
 					sprintf(num_veces,"%d",num);
 				
-					close(pp[i][0]);
 					write(pp[i][1], num_veces, 50);
-					close(pp[i][1]);
-				}
-			//}
-			exit(0);
+				
+			}
+		pidh = getpid();
+		pidp = getppid();
+		printf("Mi PID es %d, el PID de mi padre es %d y las palabras que encontre fueron:\n", pidh, pidp);
+		//busprt(&pal,pidh);
+		
 		}
 		break;			
 	}
@@ -179,14 +180,12 @@ void procpadre(int argc, char *argv[])
 		/* El padre recibe del hijo el numero de veces que encontro la palabra
 		 * y busca la nueva palabra para pasarsela al hijo, revisando si el exit
 		 * del hijo fue existoso */
-		while((pid_hijo = wait(&status)) != -1){
-			close(pp[0][1]);
+		while(num != -1){
 			read(pp[0][0], num_veces, 50);
-			close(pp[0][0]);
 			char c[] = "hola";
 			
 			int occur = atoi(num_veces);
-			
+			if(occur != -1) {
 			FILE * sld = fopen("salida.txt","a");
 			if(sld ==NULL) {
 				printf("No se pudo abrir el archivo\n");
@@ -196,8 +195,21 @@ void procpadre(int argc, char *argv[])
 			fclose(sld);
 					
 			agrpal(&cb,ph,0);
-			
-		}		
+			}else {
+				break;	
+			}			
+		}
+		
+		while(wait() != -1);
+		for(i = 0; i < n; i++) {
+			close(pp[i][0]);
+			close(pp[i][1]);
+			close(ph[i][0]);
+			close(ph[i][0]);	
+		}	
+			liberarp(&pal);
+			liberar(&cb);
+			exit(0);
 }		
 
 /* Funcion del proceso hijo */
@@ -206,14 +218,9 @@ int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;
 	char entrada[50], pal_archivo[50];
-	int i=0,j, pidh, pidp;
-	j = -1;
+	int i=0,j=-1;
 	
 	if (strcmp(palabras, "NOMAS") == 0) {
-		pidh = getpid();
-		pidp = getppid();
-		printf("Mi PID es %d, el PID de mi padre es %d\n", pidh, pidp);
-		// FALTARIA IMPRIMIR TODAS LAS PALABRAS QUE BUSCO
 		return j;
 	}	
 		

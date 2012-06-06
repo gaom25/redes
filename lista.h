@@ -40,18 +40,16 @@ void agrpal (Lista **L, int mx[][2], int i)
 {
 		Lista *tmp;
 		tmp = *L;
+		char nomas[] = {"NOMAS"};
 		if(tmp != NULL) {
-			close(mx[i][0]);
 			write(mx[i][1],tmp->nombre,strlen(tmp->nombre)+1);
-			close(mx[i][1]);
-			tmp = tmp->proximo;
+			*L = (*L)->proximo;
 			//free(tmp);
 		}else{
-			close(mx[i][0]);
-			write(mx[i][1],"NOMAS",6);
-			close(mx[i][1]);
+			write(mx[i][1],nomas,strlen(nomas)+1);
 		}
 }			
+
 
 int imprimir (Lista **L)
 {
@@ -61,10 +59,24 @@ int imprimir (Lista **L)
 	
 	while (tmp->proximo != NULL)
 	{
-		//printf("palabra: %s \n", tmp->nombre);
+		printf("palabra: %s \n", tmp->nombre);
 		tmp = tmp->proximo;
 		i++;
 	}
 	return i;
 }		
+
+liberar(Lista **cabeza){
+		Lista *rm;
+		rm = *cabeza;
+		if(*cabeza != NULL) {
+			*cabeza = (*cabeza)->proximo;
+		
+			while(*cabeza != NULL){
+				free(rm);
+				rm = *cabeza;
+				*cabeza = (*cabeza)->proximo;
+				}
+		}
+}
 		
