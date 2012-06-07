@@ -36,26 +36,37 @@ void insertarp(char palabras[],int a, Listap **L)				// Procedimiento para inser
 		}
 }
 
+void imprimirp (Listap **cabeza)
+{
+	Listap *tmp;
+	tmp = *cabeza;
+	int i=0;
+	
+	while (tmp != NULL)
+	{
+		printf("palabra: %s \n", tmp->nombre);
+		printf("pid: %d \n", tmp->pid);
+		tmp = tmp->proximo;
+	}
+}
+
 void busprt(Listap **cabeza, int p){
 	Listap *tmp;
-   tmp = *cabeza;
+	tmp = *cabeza;
 
    /* si la lista está vacía no hacemos nada */
    if (*cabeza == NULL){
-      printf("\n\nLa lista está vacía.\n");
+      printf("La lista esta vacia\n");
    }
    else                                          /* proceso normal (lista no vacía) */
    {
-		while(tmp->pid != p){
+		/*while(tmp->pid != p){
 			tmp = tmp->proximo; 	
 		}
-      printf("%s ",tmp->nombre);
+      printf("%s ",tmp->nombre);*/
       
-  		while(tmp != NULL){
-  			if(tmp->pid == p) {
-  				printf(",%s ",tmp->nombre);
-				tmp = tmp->proximo;
-			}
+  		while(tmp->proximo != NULL && tmp->pid == p) {
+  			printf("%s\n",tmp->nombre);
 			tmp = tmp->proximo;
 		}
       

@@ -37,15 +37,14 @@ void insertar(char palabras[], Lista **L)
 }
 
 
-void agrpal (Lista **L, int mx[][2], int i)
+void agrpal (Lista **L, int **mx, int i)
 {
 		Lista *tmp;
 		tmp = *L;
-		char nomas[] = {"NOMAS"};
+		
 		if(tmp != NULL) {
 			write(mx[i][1],tmp->nombre,strlen(tmp->nombre)+1);
 			*L = (*L)->proximo;
-			//free(tmp);
 		}else{
 			write(mx[i][1],"NOMAS",6);
 		}

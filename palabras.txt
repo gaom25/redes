@@ -2,4 +2,7 @@ hola
 chao
 como
 estas
-NOMAS
+bueno
+malo
+bonito
+barato
