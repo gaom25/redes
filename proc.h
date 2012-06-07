@@ -5,6 +5,11 @@
 /*		   Katrin Bethencourt 09-10102		*/
 /********************************************/
 
+/******************************************/
+/* Header que contiene los procedimientos */
+/* 			usados en el main			  */
+/******************************************/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -17,20 +22,6 @@ void procpadre(int argc, char *argv[]);
 void titulo_pal(int argc, char *argv[]);
 void comprobacion(int argc, char *argv[]);
 int prochijo(int argc, char *argv[], char palabras[]);
-
-int main (int argc, char *argv[])
-{
-
-comprobacion(argc, argv);
-procpadre(argc, argv);
-
-/*printf("args: %d \n", argc);
-printf("array[0]: %s \n", argv[0]);
-printf("array[1]: %s \n", argv[1]);
-printf("array[2]: %s \n", argv[2]);
-printf("arch entrada: %s \n", argv[argc-2]);*/
-
-}
 
 /* Funcion que comprueba el pase de argumentos */
 void comprobacion(int argc, char *argv[])
@@ -61,14 +52,13 @@ void comprobacion(int argc, char *argv[])
 				}
 			}
 		}
-	}
-
-	if (strcmp(argv[2],"-n") == 0)
-	{
-		int num = atoi(argv[2]);
-		if (num < 1) {
-			printf("n debe ser un entero mayor o igual que 1\n");
-			exit(1);
+		if (strcmp(argv[2],"-n") == 0)
+		{
+			int num = atoi(argv[2]);
+			if (num < 1) {
+				printf("n debe ser un entero mayor o igual que 1\n");
+				exit(1);
+			}
 		}
 	}
 
@@ -82,7 +72,7 @@ void procpadre(int argc, char *argv[])
 	Listap *pal = NULL;
 	int **ph, **pp;
 	char palabras[50], titulo[50], salida[50], pal_buscar[50],num_veces[50], pal_hijo[50];
-	int i, j, k, n, hpid, num, guardia, pidh, pidp;
+	int i, j, k, n, hpid, num, guardia, pidh, pidp, p1, p2;
 	guardia = 0;
 	j = 0; 
 	k = 0; 
@@ -149,8 +139,13 @@ void procpadre(int argc, char *argv[])
 
 	/* Crea los pipes para la comunicacion entre padre e hijos */
 	for(i = 0; i< n; i++) {
-		pipe(ph[i]);
-		pipe(pp[i]);
+		p1 = pipe(ph[i]);
+		p2 = pipe(pp[i]);
+		if ( p1 == -1 && p2 == -1)
+		{
+			printf("Error al crear el pipe\n");
+			exit(1);
+		}	
 	}
 
 	/* Se crean los n procesos hijos */
@@ -289,4 +284,3 @@ int prochijo(int argc, char *argv[], char palabras[])
 	fclose(fd);
 	return i;
 }
-
