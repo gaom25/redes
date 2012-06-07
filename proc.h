@@ -209,8 +209,10 @@ void procpadre(int argc, char *argv[])
 			}
 		}
 		
-		//liberarp(&pal);
-		//liberar(&cb);
+		liberarp(&pal);
+		liberar(&cb);
+		free(ph);
+		free(pp);
 
 		exit(0);
 
