@@ -5,10 +5,10 @@
 /*		   Katrin Bethencourt 09-10102		*/
 /********************************************/
 
-/******************************************/
-/* Header que contiene los procedimientos */
-/* 			usados en el main			  */
-/******************************************/
+/********************************************/
+/*  Header que contiene los procedimientos  */
+/* 			 usados en el main			    */
+/********************************************/
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -19,11 +19,10 @@
 #include "listap.h"
 
 void procpadre(int argc, char *argv[]);
-void titulo_pal(int argc, char *argv[]);
 void comprobacion(int argc, char *argv[]);
 int prochijo(int argc, char *argv[], char palabras[]);
 
-/* Funcion que comprueba el pase de argumentos */
+/* Función que comprueba el pase de argumentos */
 void comprobacion(int argc, char *argv[])
 {
 	int i;
@@ -64,7 +63,7 @@ void comprobacion(int argc, char *argv[])
 
 }
 
-/* Funcion del proceso padre */
+/* Función del proceso padre */
 void procpadre(int argc, char *argv[])
 {
 	FILE *fd;
@@ -78,7 +77,7 @@ void procpadre(int argc, char *argv[])
 	k = 0; 
 	num = 0;
 
-	/* Si se especifica la opcion -f, se obtiene el nombre del archivo
+	/* Si se especifica la opción -f, se obtiene el nombre del archivo
 	* de donde se deben extraer las palabras y se guarda en titulo[] */
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i],"-f") == 0) {
@@ -107,9 +106,9 @@ void procpadre(int argc, char *argv[])
 	/* Guarda en el arreglo salida[] el nombre del archivo de salida */
 	strcpy(salida, argv[argc-1]);
 	
-	/* Si se especifica la opcion -f */
+	/* Si se especifica la opción -f */
 	if (guardia != 1) {
-		/* Abre el archivo de palabras a buscar*/
+		/* Abre el archivo de palabras a buscar */
 		fd = fopen(titulo, "r");
 		if (fd == NULL) {
 			printf("No se pudo abrir el archivo\n");
@@ -137,7 +136,7 @@ void procpadre(int argc, char *argv[])
 		pp[i] = (int *)malloc (2 * sizeof(int));
 	}	
 
-	/* Crea los pipes para la comunicacion entre padre e hijos */
+	/* Crea los pipes para la comunicación entre padre e hijos */
 	for(i = 0; i< n; i++) {
 		p1 = pipe(ph[i]);
 		p2 = pipe(pp[i]);
@@ -162,7 +161,7 @@ void procpadre(int argc, char *argv[])
 
 	/* Si es el proceso padre */
 	if (hpid != 0) {
-		/* Si la opcion -f fue especificada, escribe en el pipe la
+		/* Si la opción -f fue especificada, escribe en el pipe la
 		 * palabra que obtiene de la estructura */ 
 		
 		if (guardia != 1) {
@@ -170,8 +169,8 @@ void procpadre(int argc, char *argv[])
 				agrpal(&cb,ph,i);
 			}		
 		
-		/* Si se especifico la opcion -w, le pasa la palabra al proceso
-		 * hijo, y si el usuario pidio mas procesos, se les dice a los 
+		/* Si se especificó la opcion -w, le pasa la palabra al proceso
+		 * hijo, y si el usuario pidió más procesos, se les dice a los 
 		 * otros que ya no hay mas palabras */		
 		} else {
 			write(ph[0][1],pal_buscar,strlen(pal_buscar)+1);
@@ -181,8 +180,8 @@ void procpadre(int argc, char *argv[])
 		}
 		
 		/* Ciclo que ejecuta el padre, leyendo por los pipes las palabras
-		 * y el numero de veces que cada las encontro cada hijo, y escribe
-		 * en el archivo de salida */
+		 * y el número de veces que fueron encontradas por cada hijo, 
+		 * y escribe en el archivo de salida */
 		while (k != n) {	
 			for(i=0; i<n && k != n; i++) {	
 				read(pp[i][0], num_veces, 50);
@@ -190,7 +189,7 @@ void procpadre(int argc, char *argv[])
 			
 				int occur = atoi(num_veces);
 			
-				/* Si el numero escrito en el pipe por el hijo es -1, 
+				/* Si el número escrito en el pipe por el hijo es -1, 
 				 * significa que hizo exit */
 				if (occur != -1) {
 					FILE * sld = fopen(salida,"a");
@@ -219,10 +218,10 @@ void procpadre(int argc, char *argv[])
 	/* Si es el proceso hijo */
 	} else {
 		/* Mientras el padre no le haya indicado al hijo que ya no hay 
-		 * mas palabras para enviar, lee la palabra que le paso el padre
+		 * más palabras para enviar, lee la palabra que le paso el padre
 		 * y la guarda en una estructura, luego procede a buscarla, y
-		 * por ultimo le envia al padre la palabra que busco y el numero
-		 * de veces que la encontro */
+		 * por último le envia al padre la palabra que buscó y el número
+		 * de veces que la encontró */
 		while(num != -1) {
 			read(ph[j][0], palabras, 50);
 			insertarp(palabras,getpid(),&pal);
@@ -239,9 +238,7 @@ void procpadre(int argc, char *argv[])
 		close(pp[j][0]);
 		close(ph[j][1]);
 		close(ph[j][0]);
-		
-		//imprimirp(&pal);	
-		
+				
 		/* Imprime su PID, el PID de su padre y las palabras que busco */
 		pidh = getpid();
 		pidp = getppid();
@@ -253,7 +250,7 @@ void procpadre(int argc, char *argv[])
 	}
 }	
 
-/* Funcion del proceso hijo */
+/* Función del proceso hijo */
 int prochijo(int argc, char *argv[], char palabras[])
 {
 	FILE *fd;

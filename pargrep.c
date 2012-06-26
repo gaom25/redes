@@ -6,9 +6,9 @@
 /********************************************/
 
 /********************************************/
-/*  Archivo principal, que implementa las   */
+/*    Archivo principal, que emplea las     */
 /*  funciones definidas en proc.h para la 	*/
-/*  realizacion de las diversas actividades	*/
+/*  realización de las diversas actividades	*/
 /********************************************/
 
 #include "proc.h"

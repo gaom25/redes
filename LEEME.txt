@@ -1,38 +1,39 @@
 Archivo LEEME.txt
-el archivo **.tar.gz contiene los siguientes archivos:
+El archivo **.tar.gz contiene los siguientes archivos:
 
-lista.h: archivo que contiene la definicion de la estructura Lista y sus
-procedimientos asociados
+lista.h: Archivo que contiene la definición de la estructura Lista y sus
+procedimientos asociados.
 
-listap.h: archivo que contiene la definicion de la estructura Listap y sus
-procedimientos asociados
+listap.h: Archivo que contiene la definición de la estructura Listap y sus
+procedimientos asociados.
 
-proc.h: archivo que contiene las funciones procpadre(), prochijo() y comprobacion()
+proc.h: Archivo que implementa las funciones procpadre(), prochijo() y comprobacion()
 
-pargrep.c: archivo que contiene el main del programa y las llamadas a procpadre()
+pargrep.c: Archivo que contiene el main del programa y las llamadas a procpadre()
 y comprobacion()
 
-LEEME.txt: archivo que contiene el nombre los archivos que vienen con el .tar.gz
-un breve descripcion de estos, el objetivo del programa, como ejecutarlo y su estructura
+LEEME.txt: Contiene el nombre de los archivos que vienen con el .tar.gz y una 
+breve descripcion de éstos, así como también el objetivo del programa, 
+como ejecutarlo y su estructura.
 
-makefile: archivo makefile el cual se usa para compilar el programa
+makefile: Archivo que se usa para compilar el programa
 
 
-El programa pargrep ejecuta una busqueda concurrente de palabras en archivos de
+El programa pargrep ejecuta una búsqueda concurrente de palabras en archivos de
 texto, por medio de un proceso padre que crea varios procesos hijos y le pasa una 
-palabra a buscar a cada hijo, los hijos buscan la palabra asignada en el archivo 
-de entrada y le envian al padre cuantas ocurrencias de las palabra asignada
-se encontraron en el archivo; esto continua asi hasta que no haya mas palabras a
-buscar por lo cual el padre imprime en un archivo de texto, cuantas ocurrencias
-de cada palabra a buscar se encontraron; los hijos al terminar su ejecucion 
-imprimen por consola su pid, el pid de su padre y cuales palabras les fue asignado
+palabra a buscar a cada hijo. Los hijos buscan la palabra asignada en el archivo 
+de entrada y le envían al padre cuántas ocurrencias de la palabra asignada
+se encontraron en el archivo. Esto continúa así hasta que no haya mas palabras a
+buscar, y el padre escribe en un archivo de texto cuántas ocurrencias
+de cada palabra a buscar se encontraron. Los hijos, al terminar su ejecución, 
+imprimen por consola su PID, el PID de su padre y cuáles palabras les fue asignado
 a buscar.
 
 
-Ejecucion:
+1) Ejecución:
 
 Para ejecutar el programa, primero se compila por medio del makefile que viene con 
-este archivo luego se escribe por consola el siguiente script
+este archivo. Luego, se escribe por consola el siguiente script
 pargrep { -h | [-n i] {-f archpalabras | -w palabra} entrada salida }
 donde:
 -h (ayuda o help). Imprime un mensaje sencillo por pantalla indicando cómo invocar 
@@ -58,46 +59,46 @@ salida: archivo que contendrá una línea por cada palabra buscada, junto con el
 
 los parámetros entrada y salida son obligatorios.
 
-Estructura:
+2) Estructura:
 
-El programa contiene funciones para hacer su ejecucion y estructuras para manejar
+El programa contiene funciones para hacer su ejecución y estructuras para manejar
 los datos.
 
-funciones:
+*Funciones:
 
-comprobacion() es el procedimiento que verifica que los parametros de entrada sean correctos
-y que no haya error al introducirlos
+comprobacion(): Es el procedimiento que verifica que los parámetros de entrada sean correctos
+y que no haya error al introducirlos.
 
-procpadre() es el procedimiento principal del programa, alli se crean las estructuras de datos
-necesarias para la ejecucion, se crean los procesos hijos y la estructura del pipe, tambien
-contiene el codigo de ejecucion del padre y de los hijos
+procpadre(): Es el procedimiento principal del programa, allí se crean las estructuras de datos
+necesarias para la ejecución, como los procesos hijos y la estructura del pipe. También
+contiene el código de ejecución del padre y de los hijos.
 
-prochijo() es la funcion principal de hijo, alli es donde cuenta la cantidad de ocurrencias
-de la palabra en el archivo y verifica si la se introdujo la palabra clave "NOMAS", la cual
-es la clave para indicarle al hijo que no hay mas palabras a buscar.
+prochijo(): Es la función principal del hijo, a través de la cual cuenta la cantidad de ocurrencias
+de la palabra en el archivo. Verifica si se introdujo la palabra "NOMAS", que
+le indica al hijo que no hay más palabras a buscar.
 
-insertar() es el procedimiento que inserta las palabras a buscar en una lista
+insertar(): Es el procedimiento que inserta las palabras a buscar en una lista.
 
-arpal() el es procedimiento el cual escribe en el pipe la siguiente palabra a buscar por cada hijo
+agrpal(): Es el procedimiento que escribe en el pipe la siguiente palabra a buscar por cada hijo.
 
-liberar() procedimiento que libera la memoria de la lista
+liberar(): Procedimiento que libera la memoria de la lista.
 
-insertarp() procedimiento que inserta las palabras a buscar asociadas a cada hijo en una lista
+insertarp(): Procedimiento que inserta las palabras a buscar asociadas a cada hijo en una lista.
 
-busprt() procedimiento que busca las palabras asociadas a cada proceso hijo y las imprime por 
-pantalla
+busprt(): Procedimiento que busca las palabras asociadas a cada proceso hijo y las imprime por 
+pantalla.
 
-liberarp() procedimiento que libera la memoria de la lista
+liberarp(): Procedimiento que libera la memoria de la lista.
 
-estructuras:
+*Estructuras:
 
-En el programa se usaron ciertas estructuras especiales para la buena ejecucion del programa
+En el programa se usaron ciertas estructuras especiales para la buena ejecución del programa, tales como:
 
-Matriz de pipes: es una matriz dinamica de pipes, esta es la via de comunicacion entre el padre y 
-los hijos y es por donde se envian las palabras a buscar y el numero de ocurrencias por palabra
+-Matriz de pipes: Es una matriz dinámica de pipes. Es la vía de comunicación entre el padre y 
+los hijos, y es por donde se envían las palabras a buscar y el número de ocurrencias por palabra.
 
-Lista: es una estructura de tipo lista la cual contiene las palabras a buscar introducidas por un
-archivo
+-Lista: Es una estructura de tipo lista, que contiene las palabras a buscar, extraídas del archivo
+especificado.
 
-Listap: es un estructura de tipo lista la cual contiene las palabras buscadas por cada hijo y
-el pid del hijo que busca la palabra asignada
+Listap: Es un estructura de tipo lista, que contiene las palabras buscadas por cada hijo y
+el PID del hijo que busca la palabra asignada.

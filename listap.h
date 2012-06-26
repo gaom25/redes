@@ -1,24 +1,39 @@
+/********************************************/
+/*				 Proyecto 1					*/
+/********************************************/
+/*			Gustavo Ortega 09-10590			*/
+/*		   Katrin Bethencourt 09-10102		*/
+/********************************************/
+
+/********************************************/
+/* Header que crea la lista utilizada para  */
+/*   guardar la palabra que buscó el hijo,	*/
+/*   		con su respectivo PID 	        */
+/********************************************/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
 
-struct def {									// Definicion de estructura estudiante
+/* Define la lista */
+struct def {
  	char nombre[51];
  	int pid;
  	struct def *proximo;
  };
  
 typedef struct def Listap;
- 
-void insertarp(char palabras[],int a, Listap **L)				// Procedimiento para insertar nuevo Lista
+
+/* Procedimiento para insertar nuevo elemento a la lista */
+void insertarp(char palabras[],int a, Listap **L)				
 {
 	   Listap *new;
 	   Listap *prox = *L;
 	   
 	   new = (Listap *)malloc(sizeof (Lista));
 	   
-	   if (new == NULL) {							// Si la llamada al sistema retorna NULL es que la memoria 											esta llena y no puede albergas mas estructuras Estudiante
+	   if (new == NULL) {
 	     printf("Memoria llena\n");
 	   } else {
 	     strcpy(new->nombre, palabras);
@@ -36,55 +51,36 @@ void insertarp(char palabras[],int a, Listap **L)				// Procedimiento para inser
 		}
 }
 
-void imprimirp (Listap **cabeza)
-{
-	Listap *tmp;
-	tmp = *cabeza;
-	int i=0;
-	
-	while (tmp != NULL)
-	{
-		printf("palabra: %s \n", tmp->nombre);
-		printf("pid: %d \n", tmp->pid);
-		tmp = tmp->proximo;
-	}
-}
-
+/* Imprime las palabras que coincidan con el PID */
 void busprt(Listap **cabeza, int p){
 	Listap *tmp;
 	tmp = *cabeza;
 
-   /* si la lista está vacía no hacemos nada */
-   if (*cabeza == NULL){
-      printf("La lista esta vacia\n");
-   }
-   else                                          /* proceso normal (lista no vacía) */
-   {
-		/*while(tmp->pid != p){
-			tmp = tmp->proximo; 	
-		}
-      printf("%s ",tmp->nombre);*/
-      
-  		while(tmp->proximo != NULL && tmp->pid == p) {
-  			printf("%s\n",tmp->nombre);
+   /* Si la lista está vacía se indica */
+	if (*cabeza == NULL){
+		printf("La lista esta vacia\n");
+	} else {
+		while(tmp->proximo != NULL && tmp->pid == p) {
+			printf("%s\n",tmp->nombre);
 			tmp = tmp->proximo;
 		}
       
     }	
 }
 
+/* Libera los apuntadores */
 liberarp(Listap **cabeza){
-		Listap *rm;
-		rm = *cabeza;
-		if(*cabeza != NULL) {
+	Listap *rm;
+	rm = *cabeza;
+	if(*cabeza != NULL) {
+		*cabeza = (*cabeza)->proximo;
+	
+		while(*cabeza != NULL){
+			free(rm);
+			rm = *cabeza;
 			*cabeza = (*cabeza)->proximo;
-		
-			while(*cabeza != NULL){
-				free(rm);
-				rm = *cabeza;
-				*cabeza = (*cabeza)->proximo;
-				}
 		}
+	}
 }
 
 	
