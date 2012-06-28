@@ -6,11 +6,11 @@
 int main(int argc, char *argv[]){
     
     char tmp[80], directorio[100], palabra[50], salida[50], archivo[150];
-    int len, tipo, count, guardia;
+    int len, tipo, count, guardia, i, j;
     struct dirent *pDirent;
     DIR *pDir;
     guardia = 0;
-
+   
    /* Aqui vendria la comprobacion de argumentos */
    
    /* Si se especifica la opcion -d, se obtiene el directorio, por
@@ -45,35 +45,33 @@ int main(int argc, char *argv[]){
         printf("[%s]\n", pDirent->d_name);
         tipo = pDirent->d_type;
         
-        if (tipo == 8){
+        if (tipo == 8) {
 			strcpy(archivo, argv[1]);
 			strcat(archivo, pDirent->d_name);
+			j = strlen(archivo);
 			
-			if (archivo[i] == 't') {
-		tmp[0] = archivo[i];
-		tmp[1] = archivo[i-1];
-		tmp[2] = archivo[i-2];
-		tmp[3] = archivo[i-3];
+			if (archivo[j] == 't') {
+				tmp[0] = archivo[j];
+				tmp[1] = archivo[j-1];
+				tmp[2] = archivo[j-2];
+				tmp[3] = archivo[j-3];
 		
-		if (strcmp(tmp, "txt.") != 0) {
-			return -1;
-		}	
+				if (strcmp(tmp, "txt.") != 0) {
+					continue;
+					/* Que si no es .txt lo ignore y pase a buscar
+					 * otro archivo */
+				} else {
+					/* Si termina en .txt pone al hilo a buscar la
+					 * palabra...el peo es que si nos especifican el
+					 * numero de hilos, solo se deben crear n hilos,
+					 * no se como poner eso */
+				}	 
+			}
+		}			
 	}
 			
 			
-			
-			
-			count = buscar(argv[2], temp);
-			
-			if(count != -1){
-				printf("El numero de veces que '%s' esta en %s es %d\n", argv[2], temp, count);
-			} else {
-				continue;
-			}
-			
-		}
-    }
-    
+		  
     closedir (pDir);
     return 0;
 }

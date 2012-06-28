@@ -59,19 +59,15 @@ void comprobacion(int argc, char *argv[])
 		}
 	}else {
 		for(i = 1; i < argc; i++) {
-			if (strcmp(argv[i],"-f") == 0 || strcmp(argv[i],"-w") == 0 ) {
-				if (argv[i+2] == NULL) {
-					printf("Falta archivo de entrada\n");
+			if (strcmp(argv[i],"-d") == 0) {
+				if (argv[i+1] == NULL) {
+					printf("No se especifico directorio\n");
 					exit(1);
-				} else {
-					if (strcmp(argv[i+2],"-w") == 0 || strcmp(argv[i+2],"-f") == 0) {
-						printf("Las opciones -w y -f son excluyentes\n");
-						exit(1);
-					}
 				}
+				 
 			}
 		}
-		if (strcmp(argv[2],"-n") == 0)
+		if (strcmp(argv[1],"-n") == 0)
 		{
 			int num = atoi(argv[2]);
 			if (num < 1) {
@@ -80,5 +76,17 @@ void comprobacion(int argc, char *argv[])
 			}
 		}
 	}
+	
+	/* Hay que considerar que no se introduzca palabra a buscar
+	* y archivo de salida */
+			
+	/*if (argv[3] == NULL) {
+		printf("Falta palabra a buscar\n");
+		exit(1);
+	}
+	if (argv[4] == NULL) {
+		printf("Falta archivo de salida\n");
+		exit(1);
+	}*/
 
 }
