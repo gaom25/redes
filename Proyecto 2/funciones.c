@@ -8,7 +8,7 @@ int buscar(char pal[], char archivo[])
 {
 	FILE *fd;
 	char pal_archivo[50], tmp[5];
-	int i=strlen(archivo);
+	int i=0;
 	
 	if (archivo[i] == 't') {
 		tmp[0] = archivo[i];
@@ -28,18 +28,18 @@ int buscar(char pal[], char archivo[])
 		exit(1);
 	}
 
-		/* Lee las palabras del archivo y las compara con la palabra a buscar
-		* enviada por el padre */
-		fscanf(fd, "%s", pal_archivo);
-		while (!feof(fd)) {
-			if (strcmp(pal_archivo, pal) == 0) {
-				i++;
-			}
-			fscanf(fd, "%s", pal_archivo);
+	/* Lee las palabras del archivo y las compara con la palabra a buscar
+	* enviada por el padre */
+	fscanf(fd, "%s", pal_archivo);
+	while (!feof(fd)) {
+		if (strcmp(pal_archivo, pal) == 0) {
+			i++;
 		}
+		fscanf(fd, "%s", pal_archivo);
+	}
 		
-		fclose(fd);
-		return i;
+	fclose(fd);
+	return i;
 
 }
 
