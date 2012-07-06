@@ -21,9 +21,10 @@ typedef struct{
  * existan más palabras para buscar */
 
 char palabra[50], salida[50];
+int flag;
 /* El arreglo "palabra" será empleado para contener la palabra a buscar
  * y el arreglo "salida" contendrá el archivo de salida donde se va a
- * escribir */
+ * escribir. "flag" es utilizado para saber si se especificó la opción -r */
 
 /****************************************************************/
 /*					FUNCION: recursiva							*/
@@ -94,11 +95,13 @@ void *funhilo(void *datos)
 	pthread_exit(NULL);
 }
 
-
+/****************************************/
+/* 			FUNCION: main				*/
+/****************************************/
 void main(int argc, char *argv[]) {
 	
 	int i, j, k, n, tipo;
-	/* "n" es el número de hilos y "tipo" contendrá el tipo del archivo 
+	/* "n" es el número de hilos, "tipo" contendrá el tipo del archivo 
 	 * que fue leído del directorio */
 	
 	struct timeval t1, t2;
@@ -129,6 +132,7 @@ void main(int argc, char *argv[]) {
 	/* El valor por defecto del número de hilos es 1, y el directorio
 	 * es el actual */
 	n = 1;
+	flag = 0;
 	strcpy(directorio,".");
 	
 	/* Si se especifica la opción -h, se muestra la ayuda, a través de
@@ -153,6 +157,14 @@ void main(int argc, char *argv[]) {
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i],"-n") == 0) {
 			n = atoi(argv[i+1]);
+			break;
+		}
+	}
+	
+	/* Se verifica si se especificó la opción -r */
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-r") == 0) {
+			flag = 1;
 			break;
 		}
 	}
@@ -295,12 +307,12 @@ void recursiva(char dir[], int n, manejador ***d) {
 		}
 		
 		/* Si es un directorio, verifica que no sea ni el directorio
-		 * padre ni el actual, y concatena el directorio anterior con el
+		 * padre, ni el actual, y concatena el directorio anterior con el
 		 * nuevo, para formar la nueva ruta*/
-		if (tipo == 4) {
+		if ((tipo == 4) && (flag == 1)) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
 				snprintf (ruta, 100,"%s%s/", dir, pDirent->d_name);
-				/* Llama recursivamente a la funcion con la nueva ruta*/
+				/* Llama recursivamente a la función con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}
 		}
