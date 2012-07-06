@@ -75,16 +75,19 @@ void comprobacion(int argc, char *argv[])
 	}else {
 		for(i = 1; i < argc; i++) {
 			if (strcmp(argv[i],"-d") == 0) {
-				if (argv[i+2] == NULL) {
-					printf("Falta palabra a buscar\n");
-					exit(1);
-				}
 				if (argv[i+3] == NULL) {
-					printf("Falta archivo de salida\n");
+					printf("Falta archivo de salida o palabra a buscar\n");
 					exit(1);
 				}	
 			}
 		}
+		
+		for(i = 1; i < argc; i++) {
+			if ((strcmp(argv[i],"-r") == 0) && (argc < 4)) {
+				printf("Falta archivo de salida o palabra a buscar\n");
+				exit(1);
+			}
+		}		
 		
 		if (strcmp(argv[1],"-n") == 0)
 		{
@@ -94,12 +97,8 @@ void comprobacion(int argc, char *argv[])
 				exit(1);
 			}
 			
-			if (argv[3] == NULL) {
-				printf("Falta palabra a buscar\n");
-				exit(1);
-			}
 			if (argv[4] == NULL) {
-				printf("Falta archivo de salida\n");
+				printf("Falta archivo de salida o palabra a buscar\n");
 				exit(1);
 			}	
 		}
