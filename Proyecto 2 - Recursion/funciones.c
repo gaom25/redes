@@ -81,6 +81,7 @@ void comprobacion(int argc, char *argv[])
 				}
 				if (argv[i+3] == NULL) {
 					printf("Falta archivo de salida\n");
+					exit(1);
 				}	
 			}
 		}
@@ -95,9 +96,11 @@ void comprobacion(int argc, char *argv[])
 			
 			if (argv[3] == NULL) {
 				printf("Falta palabra a buscar\n");
+				exit(1);
 			}
 			if (argv[4] == NULL) {
 				printf("Falta archivo de salida\n");
+				exit(1);
 			}	
 		}
 	}
