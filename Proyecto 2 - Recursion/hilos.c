@@ -131,6 +131,36 @@ void main(int argc, char *argv[]) {
 	n = 1;
 	strcpy(directorio,".");
 	
+	/* Si se especifica la opción -h, se muestra la ayuda, a través de
+	 * la función con el mismo nombre (referirse a funciones.c) */
+	if (strcmp(argv[1], "-h") == 0) {
+		ayuda();
+	}
+		
+	/* Realiza la comprobacion de argumentos */
+	comprobacion(argc, argv);
+	
+	/* Si se especifica la opción -d, se obtiene el directorio donde se 
+	 * deben buscar los archivos */
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-d") == 0) {
+			strcpy(directorio, argv[i+1]);
+			break;
+		}	
+	}
+		
+	/* Si se especifica la opción -n, se obtiene el número de hilos */
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-n") == 0) {
+			n = atoi(argv[i+1]);
+			break;
+		}
+	}
+			
+	/* Se obtiene la palabra a buscar y el archivo de salida */
+	strcpy(palabra, argv[argc-2]);
+	strcpy(salida, argv[argc-1]);
+	
 	/* Se inicializa el arreglo de estructuras de tipo manejador, 
 	 * comprobando si se produjo un error al alocar memoria */
 	datos = (manejador **) malloc(n * sizeof(manejador *));
@@ -153,43 +183,11 @@ void main(int argc, char *argv[]) {
 		printf("Error al alocar memoria, intente mas tarde\n");
 		exit(1);
 	}	
-	
-	/* Si se especifica la opción -h, se muestra la ayuda, a través de
-	 * la función con el mismo nombre (referirse a funciones.c) */
-	if (strcmp(argv[1], "-h") == 0) {
-		ayuda();
-	}
-		
-	/* Realiza la comprobacion de argumentos */
-	comprobacion(argc, argv);
-	
-	/* Si se especifica la opción -d, se obtiene el directorio donde se 
-	 * deben buscar los archivos */
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-d") == 0) {
-			strcpy(directorio, argv[i+1]);
-			break;
-		}
-	}
-		
-	/* Si se especifica la opción -n, se obtiene el número de hilos */
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-n") == 0) {
-			n = atoi(argv[i+1]);
-			break;
-		}
-	}
-			
-	/* Se obtiene la palabra a buscar y el archivo de salida */
-	strcpy(palabra, argv[argc-2]);
-	strcpy(salida, argv[argc-1]);
-	
-	
 
 	/* Se crean todos los hilos primero y se quedan esperando archivos */
 	for(i = 0; i < n; i++) {
-		/* Se le dice que no está trabajando ningún archivo, y que
-		 * todavía quedan palabras por buscar, para que espere */
+		/* Se le dice que no esta trabajando ningun archivo, y que
+		 * todavaa quedan palabras por buscar, para que espere */
 		strcpy(datos[i]->archivo,"a");
 		datos[i]->nomas = 0;
 		k = pthread_create(&threads[i], NULL, funhilo, datos[i]);
@@ -229,11 +227,24 @@ void main(int argc, char *argv[]) {
 }
 
 void recursiva(char dir[], int n, manejador ***d) {
-	manejador **datos;	
+	manejador **datos;
+	/* Estructura de tipo manejador, cuyo campo "archivo" será 
+	 * utilizado para indicarle al hilo la palabra que debe buscar */	
+	
 	char ruta[100], dirtmp[100];
+	/* El arreglo "dirtmp" será utilizado para indicarle al hilo la ruta
+	 * del archivo donde debe buscar la palabra (si es un archivo regular),
+	 * el arreglo "ruta" será empleado para concatenar los directorios
+	 * recursivamente */
+	
 	int i, j, tipo;
+	/* "tipo" contendrá el tipo del archivo que fue leído del directorio */
+	
 	struct dirent *pDirent;
 	DIR *pDir;
+	 /* pDirent es una estructura para acceder a los campos del
+     * directorio, y pDir es un apuntador al stream del directorio */
+     
 	datos = *d;
 	i = 0;
 	
@@ -250,7 +261,8 @@ void recursiva(char dir[], int n, manejador ***d) {
 	while ((pDirent = readdir(pDir)) != NULL) {
 		
 		tipo = pDirent->d_type;
-	
+		
+		/* Si es un archivo regular, se le pasa directamente al hilo */
 		if (tipo == 8) {
 			/* Se comprueba que el archivo del directorio sea de 
 			 * extension .txt */
@@ -260,14 +272,20 @@ void recursiva(char dir[], int n, manejador ***d) {
 			if (j == -1) {
 				continue;					
 			} else {
-				/* Concatena el archivo que se encontro en el directorio
-				 * que esta haciendo leido, con la ruta del directorio, 
+				/* Concatena el archivo que se encontró en el directorio
+				 * que está siendo leído, con la ruta del directorio, 
 				 * para formar la ruta completa del archivo donde se 
 				 * debe buscar la palabra */
 				strcpy(dirtmp, dir);
+				if (strcmp(dirtmp, ".") == 0) {
+					strcpy(dirtmp, "./");
+					strcat(dirtmp, pDirent->d_name);
+				} else {
+					strcat(dirtmp, pDirent->d_name);
+				}		
 				
-				strcat(dirtmp, pDirent->d_name);
-				
+				/* Se queda esperando por algún hilo que no esté
+				 * trabajando en un archivo */
 				while (strcmp(datos[i]->archivo, "a") != 0) {
 					i = (i+1)%n;
 				}
@@ -276,10 +294,12 @@ void recursiva(char dir[], int n, manejador ***d) {
 			}	
 		}
 		
+		/* Si es un directorio, verifica que no sea ni el directorio
+		 * padre ni el actual, y concatena el directorio anterior con el
+		 * nuevo, para formar la nueva ruta*/
 		if (tipo == 4) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
 				snprintf (ruta, 100,"%s%s/", dir, pDirent->d_name);
-				//printf ("%s\n", ruta);
 				/* Llama recursivamente a la funcion con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}
