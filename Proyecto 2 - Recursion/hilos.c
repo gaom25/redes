@@ -10,18 +10,38 @@
 #include "funciones.c"
 
 /* Variables globales */
+
 typedef struct{
 		char archivo[100];
 		int nomas;
 } manejador;
+/* El campo "archivo" de esta estructura será empleado para especificar
+ * la ruta del archivo donde se buscará la palabra especificada. 
+ * El campo "nomas" es un entero que tendrá el valor 1 cuando ya no
+ * existan más palabras para buscar */
 
+char palabra[50], salida[50];
+/* El arreglo "palabra" será empleado para contener la palabra a buscar
+ * y el arreglo "salida" contendrá el archivo de salida donde se va a
+ * escribir */
+
+/****************************************************************/
+/*					FUNCION: recursiva							*/
+/* OBJETIVO: Hacer la busqueda recursiva de los archivos a 		*/
+/* partir del directorio especificado.							*/
+/*																*/
+/* PARAMETROS: Un arreglo de caracteres con el directorio a		*/
+/* partir del cual se buscará, un entero con el número de hilos */
+/* y un apuntador a una estructura de tipo manejador			*/
+/*																*/
+/* RETORNO: No retorna nada.									*/
+/* NOTA: Está definida después del main							*/
+/****************************************************************/
 void recursiva(char dir[], int n, manejador ***d);
-
-char palabra[100], salida[50];
 
 /****************************************************************/
 /* 					FUNCION: funhilo							*/
-/* OBJETIVO: Se ejecutara al crear el hilo. Buscara la palabra	*/
+/* OBJETIVO: Se ejecutará al crear el hilo. Buscará la palabra	*/
 /* especificada en el archivo pasado por el proceso maestro.	*/
 /* 																*/
 /* PARAMETROS: Una estructura de tipo manejador.				*/
@@ -33,13 +53,24 @@ void *funhilo(void *datos)
 {	
 	manejador *temp;
 	temp = datos;
+	/* temp es un apuntador a una estructura de tipo manejador, que
+	 * se utilizará para indicar la palabra a buscar, y si ya no existen
+	 * más palabras */
 	int j;
 	
+	/* El hilo se quedará esperando a que el proceso maestro le indique
+	 * que ya no quedan más palabras para buscar (cuando el campo "nomas"
+	 * tenga un valor distinto de 1) */
 	while (1) {
+		/* Si el hilo está disponible (si campo de "archivo" es "a")
+		 * procede a buscar la palabra especificada en el archivo dado,
+		 * a través de la función "buscar" (referirse a funciones.c) */
 		if (strcmp(temp->archivo,"a") != 0) {
-			printf("asdasd: %s\n", temp->archivo);
 			j = buscar(palabra,temp->archivo);
-						
+			
+			/* Escribe en el archivo de salida el archivo que analizó,
+			 * la palabra que buscó, y el número de veces que fue
+			 * encontrada */			
 			FILE * sld = fopen(salida,"a");
 			if (sld == NULL) {
 				printf("No se pudo abrir el archivo\n");
@@ -47,10 +78,14 @@ void *funhilo(void *datos)
 			}
 			fprintf(sld,"%s %s %d\n",temp->archivo, palabra, j);
 			fclose(sld);
-						
+			
+			/* El hilo indica que no está buscando nada */			
 			strcpy(temp->archivo, "a");
 						
 		} else {
+			/* Si el hilo no está buscando ninguna palabra, y se le fue
+			 * indicado, por el proceso maestro, que ya no hay más
+			 * palabras, entonces se sale del ciclo y hace exit */
 			if (temp->nomas != 0) {
 				break;
 			}	
@@ -62,47 +97,42 @@ void *funhilo(void *datos)
 
 void main(int argc, char *argv[]) {
 	
-	struct timeval tempo1, tempo2;
-	long elapsed_seconds;
-	long elapsed_mtime;
-	long elapsed_useconds;
-	gettimeofday(&tempo1, NULL);
+	int i, j, k, n, tipo;
+	/* "n" es el número de hilos y "tipo" contendrá el tipo del archivo 
+	 * que fue leído del directorio */
+	
+	struct timeval t1, t2;
+	long segs, milisegs, microsegs;
+	/* t1, t2, segs, milisegs y microsegs son usadas para calcular el 
+	 * tiempo de ejecución del progrrama */
+	
 	char directorio[100];
 	/* "directorio" es un arreglo de caracteres que contiene el directorio 
 	 * especificado como parametro en el proceso */
-	manejador ** datos;
-	pthread_t *threads;
 	
-	int i, j, k, n, tipo;
-	/* "tipo" es un entero que contendra el tipo de archivo recorrido */
+	manejador ** datos;
+	/* "datos" es un arreglo de estructuras de tipo manejador, inicializado
+	 * dinámicamente más adelante */
+	
+	pthread_t *threads;
+	/* "threads" es un arreglo de hilos, inicializado dinámicamente más
+	 * adelante */
+		
 	struct dirent *pDirent;
     DIR *pDir;
+    /* pDirent es una estructura para acceder a los campos del
+     * directorio, y pDir es un apuntador al stream del directorio */
 	
+	/* Se comienza a medir el tiempo de ejecución del programa */
+	gettimeofday(&t1, NULL);
+	
+	/* El valor por defecto del número de hilos es 1, y el directorio
+	 * es el actual */
 	n = 1;
+	strcpy(directorio,".");
 	
-	if (strcmp(argv[1], "-h") == 0) {
-		ayuda();
-	}
-		
-	/* Realiza la comprobacion de argumentos */
-	comprobacion(argc, argv);
-	
-	/* Obtiene el directorio donde se debe buscar */
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-d") == 0) {
-			strcpy(directorio, argv[i+1]);
-			break;
-		}
-	}
-		
-	/* Obtiene el numero de hilos a usar */
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i],"-n") == 0) {
-			n = atoi(argv[i+1]);
-			break;
-		}
-	}
-	
+	/* Se inicializa el arreglo de estructuras de tipo manejador, 
+	 * comprobando si se produjo un error al alocar memoria */
 	datos = (manejador **) malloc(n * sizeof(manejador *));
 	if (datos == NULL) {
 		printf("Error al alocar memoria, intente mas tarde\n");
@@ -116,13 +146,41 @@ void main(int argc, char *argv[]) {
 			}	
 	}	
 	
+	/* Se inicializa el arreglo de hilos de tipo manejador, 
+	 * comprobando si se produjo un error al alocar memoria */
 	threads = (pthread_t *) malloc(n * sizeof(pthread_t));
 	if (threads == NULL) {
 		printf("Error al alocar memoria, intente mas tarde\n");
 		exit(1);
 	}	
+	
+	/* Si se especifica la opción -h, se muestra la ayuda, a través de
+	 * la función con el mismo nombre (referirse a funciones.c) */
+	if (strcmp(argv[1], "-h") == 0) {
+		ayuda();
+	}
+		
+	/* Realiza la comprobacion de argumentos */
+	comprobacion(argc, argv);
+	
+	/* Si se especifica la opción -d, se obtiene el directorio donde se 
+	 * deben buscar los archivos */
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-d") == 0) {
+			strcpy(directorio, argv[i+1]);
+			break;
+		}
+	}
+		
+	/* Si se especifica la opción -n, se obtiene el número de hilos */
+	for (i = 1; i < argc; i++) {
+		if (strcmp(argv[i],"-n") == 0) {
+			n = atoi(argv[i+1]);
+			break;
+		}
+	}
 			
-	/* Obtiene la palabra a buscar y el archivo de salida */
+	/* Se obtiene la palabra a buscar y el archivo de salida */
 	strcpy(palabra, argv[argc-2]);
 	strcpy(salida, argv[argc-1]);
 	
@@ -130,6 +188,8 @@ void main(int argc, char *argv[]) {
 
 	/* Se crean todos los hilos primero y se quedan esperando archivos */
 	for(i = 0; i < n; i++) {
+		/* Se le dice que no está trabajando ningún archivo, y que
+		 * todavía quedan palabras por buscar, para que espere */
 		strcpy(datos[i]->archivo,"a");
 		datos[i]->nomas = 0;
 		k = pthread_create(&threads[i], NULL, funhilo, datos[i]);
@@ -138,26 +198,32 @@ void main(int argc, char *argv[]) {
 		}
 	}	
 
+	/* Se llama a la función "recursiva" para buscar recursivamente los
+	 * archivos en los directorios */
 	recursiva(directorio,n,&datos);
 	
+	/* Una vez que termine, se el proceso maestro le indica a cada hilo
+	 * que no quedan más palabras por buscar, y se queda esperando por
+	 * su terminación */
 	for(i = 0; i < n; i++) {
 		datos[i]->nomas = 1;
 		pthread_join(threads[i],NULL);
 	}
 	
 	
-	gettimeofday(&tempo2, NULL);
+	gettimeofday(&t2, NULL);
 	
-	/* IMPRESIONES */
+	/* Escritura por pantalla  */
 	
 	printf("Directorio: %s\n", directorio);
 	printf("Palabra: %s\n", palabra);
 	printf("Numero de hilos: %d\n", n);
 	
-	elapsed_seconds  = tempo2.tv_sec  - tempo1.tv_sec;
-	elapsed_useconds = tempo2.tv_usec - tempo1.tv_usec;
-	elapsed_mtime = ((elapsed_seconds) * 1000 + elapsed_useconds/1000.0) + 0.5;
-	printf("Tiempo total de busqueda en milisegundos %ld\n",elapsed_mtime);
+	/* Cálculo del tiempo de ejecución del programa en milisegundos */
+	segs = t2.tv_sec - t1.tv_sec;
+	microsegs = t2.tv_usec - t1.tv_usec;
+	milisegs = ((segs) * 1000 + microsegs/1000.0) + 0.5;
+	printf("Tiempo total de busqueda: %ld milisegundos\n",milisegs);
 	
 					
 }
