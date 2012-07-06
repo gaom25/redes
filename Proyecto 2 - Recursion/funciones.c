@@ -119,27 +119,17 @@ void comprobacion(int argc, char *argv[])
 /* tiene la extension deseada .txt.							 	*/
 /****************************************************************/
 int comptxt(char archivo[]) {
-	char tmp[5];
+	char *txt;
 	/* tmp es un arreglo de caracteres usado para comparar los ultimos 4
 	 * caracteres del nombre del archivo, para saber si su extension es
 	 * .txt */
-	int i;
-	i = strlen(archivo);
-	
-	/* Obtiene los ultimos 4 caracteres del nombre del archivo */
-	if (archivo[i-1] == 't') {
-		tmp[0] = archivo[i-1];
-		tmp[1] = archivo[i-2];
-		tmp[2] = archivo[i-3];
-		tmp[3] = archivo[i-4];
-	} else {
+	char *pos;
+	txt = ".txt"; 
+	pos = strstr(archivo,txt);
+	if(!pos){
 		return -1;
-	}	
-	
-	/* Compara si los ultimos 4 caracteres del nombre del archivo es
-	 * .txt, y de no serlo, se retorna -1 */
-	if (strcmp(tmp, "txt.") != 0) {
-			return -1;
+	}else{
+		return 0;
 	}
 }
 

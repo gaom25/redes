@@ -58,6 +58,7 @@ void *funhilo(void *datos)
 	 * se utilizará para indicar la palabra a buscar, y si ya no existen
 	 * más palabras */
 	int j;
+	FILE * sld;
 	
 	/* El hilo se quedará esperando a que el proceso maestro le indique
 	 * que ya no quedan más palabras para buscar (cuando el campo "nomas"
@@ -72,7 +73,7 @@ void *funhilo(void *datos)
 			/* Escribe en el archivo de salida el archivo que analizó,
 			 * la palabra que buscó, y el número de veces que fue
 			 * encontrada */			
-			FILE * sld = fopen(salida,"a");
+			sld = fopen(salida,"a");
 			if (sld == NULL) {
 				printf("No se pudo abrir el archivo\n");
 				exit(1);
@@ -279,7 +280,6 @@ void recursiva(char dir[], int n, manejador ***d) {
 			/* Se comprueba que el archivo del directorio sea de 
 			 * extension .txt */
 			j = comptxt(pDirent->d_name);
-			
 			/* Si no es .txt lo ignora y pasa a buscar otro archivo */		
 			if (j == -1) {
 				continue;					
@@ -293,6 +293,7 @@ void recursiva(char dir[], int n, manejador ***d) {
 					strcpy(dirtmp, "./");
 					strcat(dirtmp, pDirent->d_name);
 				} else {
+					strcat(dirtmp, "/");
 					strcat(dirtmp, pDirent->d_name);
 				}		
 				
