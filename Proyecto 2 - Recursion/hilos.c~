@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <time.h>
-#include "funciones.h"
+#include "funciones.c"
 
 /* Variables globales */
 
@@ -107,7 +107,7 @@ void main(int argc, char *argv[]) {
 	struct timeval t1, t2;
 	long segs, milisegs, microsegs;
 	/* t1, t2, segs, milisegs y microsegs son usadas para calcular el 
-	 * tiempo de ejecución del programa */
+	 * tiempo de ejecución del progrrama */
 	
 	char directorio[100];
 	/* "directorio" es un arreglo de caracteres que contiene el directorio 
@@ -199,7 +199,7 @@ void main(int argc, char *argv[]) {
 	/* Se crean todos los hilos primero y se quedan esperando archivos */
 	for(i = 0; i < n; i++) {
 		/* Se le dice que no esta trabajando ningun archivo, y que
-		 * todavia quedan palabras por buscar, para que espere */
+		 * todavaa quedan palabras por buscar, para que espere */
 		strcpy(datos[i]->archivo,"a");
 		datos[i]->nomas = 0;
 		k = pthread_create(&threads[i], NULL, funhilo, datos[i]);
@@ -212,7 +212,7 @@ void main(int argc, char *argv[]) {
 	 * archivos en los directorios */
 	recursiva(directorio,n,&datos);
 	
-	/* Una vez que termine,el hilo maestro le indica a cada hilo
+	/* Una vez que termine, se el proceso maestro le indica a cada hilo
 	 * que no quedan más palabras por buscar, y se queda esperando por
 	 * su terminación */
 	for(i = 0; i < n; i++) {
@@ -311,7 +311,7 @@ void recursiva(char dir[], int n, manejador ***d) {
 		 * nuevo, para formar la nueva ruta*/
 		if ((tipo == 4) && (flag == 1)) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
-				snprintf (ruta, 100,"%s/%s", dir, pDirent->d_name);
+				snprintf (ruta, 100,"%s%s/", dir, pDirent->d_name);
 				/* Llama recursivamente a la función con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}
