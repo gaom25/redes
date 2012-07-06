@@ -62,7 +62,7 @@ void comprobacion(int argc, char *argv[])
 {
 	int i;
 	
-	if (!(argc > 1 && argc < 9)) {
+	if (!(argc > 2 && argc < 9)) {
 		printf("Numero de argumentos invalidos\n");
 		exit(1);
 	}
