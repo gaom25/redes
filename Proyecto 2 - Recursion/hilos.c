@@ -209,6 +209,13 @@ void main(int argc, char *argv[]) {
 		}
 	}	
 
+	/* Escritura por pantalla  */
+	
+	printf("Directorio: %s\n", directorio);
+	printf("Palabra: %s\n", palabra);
+	printf("Numero de hilos: %d\n", n);
+
+
 	/* Se llama a la función "recursiva" para buscar recursivamente los
 	 * archivos en los directorios */
 	recursiva(directorio,n,&datos);
@@ -221,14 +228,14 @@ void main(int argc, char *argv[]) {
 		pthread_join(threads[i],NULL);
 	}
 	
+	for(i = 0; i < n; i++){
+		free(datos[i]);
+	}
+	free(datos);
+	free(threads);
+	
 	
 	gettimeofday(&t2, NULL);
-	
-	/* Escritura por pantalla  */
-	
-	printf("Directorio: %s\n", directorio);
-	printf("Palabra: %s\n", palabra);
-	printf("Numero de hilos: %d\n", n);
 	
 	/* Cálculo del tiempo de ejecución del programa en milisegundos */
 	segs = t2.tv_sec - t1.tv_sec;
