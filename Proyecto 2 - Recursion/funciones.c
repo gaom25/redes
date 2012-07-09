@@ -20,7 +20,7 @@ int buscar(char pal[], char archivo[])
 	int i;
 	i = 0;
 	FILE *fd;
-	char pal_archivo[50];	
+	char pal_archivo[125];	
 	/* pal_archivo es un arreglo de caracteres donde se almacena cada 
 	 * palabra leida del texto */
 	
@@ -75,19 +75,16 @@ void comprobacion(int argc, char *argv[])
 	}else {
 		for(i = 1; i < argc; i++) {
 			if (strcmp(argv[i],"-d") == 0) {
+				if (argv[i+2] == NULL) {
+					printf("Falta palabra a buscar\n");
+					exit(1);
+				}
 				if (argv[i+3] == NULL) {
-					printf("Falta archivo de salida o palabra a buscar\n");
+					printf("Falta archivo de salida\n");
 					exit(1);
 				}	
 			}
 		}
-		
-		for(i = 1; i < argc; i++) {
-			if ((strcmp(argv[i],"-r") == 0) && (argc < 4)) {
-				printf("Falta archivo de salida o palabra a buscar\n");
-				exit(1);
-			}
-		}		
 		
 		if (strcmp(argv[1],"-n") == 0)
 		{
@@ -97,8 +94,12 @@ void comprobacion(int argc, char *argv[])
 				exit(1);
 			}
 			
+			if (argv[3] == NULL) {
+				printf("Falta palabra a buscar\n");
+				exit(1);
+			}
 			if (argv[4] == NULL) {
-				printf("Falta archivo de salida o palabra a buscar\n");
+				printf("Falta archivo de salida\n");
 				exit(1);
 			}	
 		}
@@ -124,7 +125,7 @@ int comptxt(char archivo[]) {
 	 * .txt */
 	char *pos;
 	txt = ".txt"; 
-	pos = strstr(archivo,txt);
+	pos = strstr(archivo,".txt");
 	if(!pos){
 		return -1;
 	}else{

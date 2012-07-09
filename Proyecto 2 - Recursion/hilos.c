@@ -12,7 +12,7 @@
 /* Variables globales */
 
 typedef struct{
-		char archivo[100];
+		char archivo[125];
 		int nomas;
 } manejador;
 /* El campo "archivo" de esta estructura será empleado para indicar
@@ -20,7 +20,7 @@ typedef struct{
  * El campo "nomas" es un entero que tendrá el valor 1 cuando ya no
  * existan más palabras para buscar */
 
-char palabra[50], salida[50];
+char palabra[125], salida[125];
 int flag;
 /* El arreglo "palabra" será empleado para contener la palabra a buscar
  * y el arreglo "salida" contendrá el archivo de salida donde se va a
@@ -252,7 +252,7 @@ void recursiva(char dir[], int n, manejador ***d) {
 	/* Estructura de tipo manejador, cuyo campo "archivo" será 
 	 * utilizado para indicarle al hilo la palabra que debe buscar */	
 	
-	char ruta[100], dirtmp[100];
+	char ruta[125], dirtmp[125];
 	/* El arreglo "dirtmp" será utilizado para indicarle al hilo la ruta
 	 * del archivo donde debe buscar la palabra (si es un archivo regular),
 	 * el arreglo "ruta" será empleado para concatenar los directorios
@@ -319,7 +319,12 @@ void recursiva(char dir[], int n, manejador ***d) {
 		 * nuevo, para formar la nueva ruta*/
 		if ((tipo == 4) && (flag == 1)) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
-				snprintf (ruta, 100,"%s%s/", dir, pDirent->d_name);
+				if(strcmp(dir,".") == 0){
+					snprintf (ruta, 125,"%s/%s/", dir, pDirent->d_name);
+				}else{
+					snprintf (ruta, 125,"%s%s/", dir, pDirent->d_name);
+				}
+
 				/* Llama recursivamente a la función con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}
