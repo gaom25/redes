@@ -1,3 +1,162 @@
+/home/katrin/operativos//casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//casos/cosas/t1.txt hola 2
+/home/katrin/operativos//casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 1/palabras.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto3.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tex.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tertt.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 23
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto3.txt hola 2
+/home/katrin/operativos//Proyecto 1/palabras.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tertt.txt hola 2
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 50
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tex.txt hola 1
+/home/katrin/operativos//casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//casos/cosas/t1.txt hola 2
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 1/palabras.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto3.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tex.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tertt.txt hola 2
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 77
+/home/katrin/operativos//casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto3.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tex.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tertt.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 99
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos//salida.txt hola 0
+./salida.txt hola 103
+//etc/X11/rgb.txt hola 0
+//etc/X11/rgb.txt hola 0
+//etc/skel/.config/chromium/chrome_shutdown_ms.txt hola 0
+/home/katrin/operativos//casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//casos/cosas/t1.txt hola 2
+/home/katrin/operativos//casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto3.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto.txt hola 3
+/home/katrin/operativos//Proyecto 1/palabras.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tex.txt hola 1
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion/casos/tertt.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 132
+/home/katrin/operativos//salida.txt hola 0
+/home/katrin/operativos/salida.txt hola 0
+/home/katrin/operativos//casos//cosas/texto4.txt hola 1
+/home/katrin/operativos//casos/texto3.txt hola 2
+/home/katrin/operativos//casos/texto.txt hola 3
+/home/katrin/operativos//casos/texto2.txt hola 3
+/home/katrin/operativos//casos/tex.txt hola 1
+/home/katrin/operativos//casos/tertt.txt hola 2
+/home/katrin/operativos//casos/t.txt hola 2
+/home/katrin/operativos//casos//cosas/tex1.txt hola 1
+/home/katrin/operativos//casos//cosas/tertt1.txt hola 2
+/home/katrin/operativos//casos//cosas/texto5.txt hola 1
+/home/katrin/operativos//casos//cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 1/palabras.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion//casos//cosas/tex1.txt hola 1
+/home/katrin/operativos//Proyecto 1/LEEME.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion//casos//cosas/t1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion//casos//cosas/texto5.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion//casos/texto2.txt hola 3
+/home/katrin/operativos//Proyecto 2 - Recursion//casos/tex.txt hola 1
+/home/katrin/operativos//Proyecto 2 - Recursion//casos/tertt.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion//casos/t.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion/salida.txt hola 155
+/home/katrin/operativos/salida.txt hola 0
+/home/katrin/operativos//Proyecto 2 - Recursion//casos//cosas/tertt1.txt hola 2
+/home/katrin/operativos//Proyecto 2 - Recursion//casos//cosas/texto4.txt hola 1
 /home/katrin/operativos/casos/cosas/texto4.txt hola 1
 /home/katrin/operativos/casos/texto3.txt hola 2
 /home/katrin/operativos/casos/texto.txt hola 3
@@ -8,8 +167,7 @@
 /home/katrin/operativos/casos/cosas/tex1.txt hola 1
 /home/katrin/operativos/casos/cosas/tertt1.txt hola 2
 /home/katrin/operativos/Proyecto 1/LEEME.txt hola 0
-/home/katrin/operativos/Proyecto 1/palabras.txt hola 1
-/home/katrin/operativos/casos/cosas/texto5.txt hola 1
+/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
@@ -19,86 +177,10 @@
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/tex.txt hola 1
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/tertt.txt hola 2
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/t.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/salida.txt hola 21
-/home/katrin/operativos/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
+/home/katrin/operativos/Proyecto 2 - Recursion/salida.txt hola 179
 /home/katrin/operativos/salida.txt hola 0
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/casos/texto3.txt hola 2
-/home/katrin/operativos/casos/texto.txt hola 3
-/home/katrin/operativos/casos/texto2.txt hola 3
-/home/katrin/operativos/casos/tex.txt hola 1
-/home/katrin/operativos/casos/tertt.txt hola 2
-/home/katrin/operativos/casos/cosas/tex1.txt hola 1
 /home/katrin/operativos/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/casos/cosas/tertt1.txt hola 2
-/home/katrin/operativos/casos/t.txt hola 2
-/home/katrin/operativos/Proyecto 1/LEEME.txt hola 0
-/home/katrin/operativos/Proyecto 1/palabras.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto3.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tertt.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/t.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/salida.txt hola 46
-/home/katrin/operativos/salida.txt hola 0
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tex.txt hola 1
 /home/katrin/operativos/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto.txt hola 3
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto2.txt hola 3
-/home/katrin/operativos/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/casos/texto3.txt hola 2
-/home/katrin/operativos/casos/texto.txt hola 3
-/home/katrin/operativos/casos/texto2.txt hola 3
-/home/katrin/operativos/casos/tex.txt hola 1
-/home/katrin/operativos/casos/tertt.txt hola 2
-/home/katrin/operativos/casos/t.txt hola 2
-/home/katrin/operativos/casos/cosas/tex1.txt hola 1
-/home/katrin/operativos/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/casos/cosas/tertt1.txt hola 2
-/home/katrin/operativos/Proyecto 1/LEEME.txt hola 0
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
 /home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto3.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto.txt hola 3
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto2.txt hola 3
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tex.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tertt.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/t.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/salida.txt hola 73
-/home/katrin/operativos/salida.txt hola 0
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
 /home/katrin/operativos/Proyecto 1/palabras.txt hola 1
-/home/katrin/operativos/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/casos/texto3.txt hola 2
-/home/katrin/operativos/casos/texto.txt hola 3
-/home/katrin/operativos/casos/texto2.txt hola 3
-/home/katrin/operativos/casos/tex.txt hola 1
-/home/katrin/operativos/casos/tertt.txt hola 2
-/home/katrin/operativos/casos/t.txt hola 2
-/home/katrin/operativos/casos/cosas/tertt1.txt hola 2
-/home/katrin/operativos/Proyecto 1/LEEME.txt hola 0
-/home/katrin/operativos/casos/cosas/tex1.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto4.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tertt1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto3.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto.txt hola 3
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/texto2.txt hola 3
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tex.txt hola 1
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/tertt.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/t.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/salida.txt hola 98
-/home/katrin/operativos/salida.txt hola 0
-/home/katrin/operativos/casos/cosas/t1.txt hola 2
-/home/katrin/operativos/Proyecto 2 - Recursion/casos/cosas/tex1.txt hola 1
-/home/katrin/operativos/casos/cosas/texto5.txt hola 1
-/home/katrin/operativos/Proyecto 1/palabras.txt hola 1
+/home/katrin/.WorldOfGoo/LastRun.txt hola 0

@@ -15,7 +15,7 @@ typedef struct{
 		char archivo[100];
 		int nomas;
 } manejador;
-/* El campo "archivo" de esta estructura será empleado para especificar
+/* El campo "archivo" de esta estructura será empleado para indicar
  * la ruta del archivo donde se buscará la palabra especificada. 
  * El campo "nomas" es un entero que tendrá el valor 1 cuando ya no
  * existan más palabras para buscar */
@@ -216,11 +216,12 @@ void main(int argc, char *argv[]) {
 	printf("Numero de hilos: %d\n", n);
 
 
-	/* Se llama a la función "recursiva" para buscar recursivamente los
-	 * archivos en los directorios */
+	/* Se llama a la función "recursiva", la cual depende del valor de la
+	 * variable "flag", para saber si se realizará la búsqueda recursiva
+	 * o no */
 	recursiva(directorio,n,&datos);
 	
-	/* Una vez que termine,el hilo maestro le indica a cada hilo
+	/* Una vez que termine, el proceso maestro le indica a cada hilo
 	 * que no quedan más palabras por buscar, y se queda esperando por
 	 * su terminación */
 	for(i = 0; i < n; i++) {
@@ -300,7 +301,6 @@ void recursiva(char dir[], int n, manejador ***d) {
 					strcpy(dirtmp, "./");
 					strcat(dirtmp, pDirent->d_name);
 				} else {
-					strcat(dirtmp, "/");
 					strcat(dirtmp, pDirent->d_name);
 				}		
 				
@@ -319,7 +319,7 @@ void recursiva(char dir[], int n, manejador ***d) {
 		 * nuevo, para formar la nueva ruta*/
 		if ((tipo == 4) && (flag == 1)) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
-				snprintf (ruta, 100,"%s/%s", dir, pDirent->d_name);
+				snprintf (ruta, 100,"%s%s/", dir, pDirent->d_name);
 				/* Llama recursivamente a la función con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}

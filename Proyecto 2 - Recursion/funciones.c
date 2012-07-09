@@ -145,7 +145,7 @@ void ayuda() {
 	printf(" Sintaxis:\n 	\n pargrep { -h | [-n i] -r -d directorio palabra salida }\n");
 	printf("\n -h: Imprime esta ayuda.\n -n i: Cantidad de hilos, i debe ser mayor o igual que 1.\n");
 	printf(" -d directorio: Especifica el directorio donde se encuentran los archivos a analizar\n");
-	printf(" -r: Se realiza la busqueda recursivamente\n");
+	printf(" -r: Se realiza la busqueda recursivamente.\n");
 	printf(" -palabra: Palabra que se desea buscar.\n");
 	printf(" -salida: Archivo en donde se escribirán los archivos analizados y el numero de veces");
 	printf(" que se encontró la palabra a buscar\n");
