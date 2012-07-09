@@ -318,7 +318,11 @@ void recursiva(char dir[], int n, manejador ***d) {
 		 * nuevo, para formar la nueva ruta*/
 		if ((tipo == 4) && (flag == 1)) {
 			if (strcmp (pDirent->d_name, "..") != 0 && strcmp (pDirent -> d_name, ".") != 0) {
-				snprintf (ruta, 125,"%s%s/", dir, pDirent->d_name);
+				if(strcmp(dir,".") == 0){
+					snprintf (ruta, 125,"%s/%s/", dir, pDirent->d_name);
+				}else{
+					snprintf (ruta, 125,"%s%s/", dir, pDirent->d_name);
+				}
 				/* Llama recursivamente a la función con la nueva ruta*/
 				recursiva(ruta,n,&datos);
 			}
