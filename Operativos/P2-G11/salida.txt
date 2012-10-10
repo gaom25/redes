@@ -1,0 +1,95 @@
+/etc/X11/rgb.txt hola 0
+/etc/skel/.config/chromium/chrome_shutdown_ms.txt hola 0
+/boot/grub/gfxblacklist.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold52.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold18.txt hola 0
+/opt/WorldOfGoo/res/fonts/wog150numbers.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold26.txt hola 0
+/opt/WorldOfGoo/properties/config.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold36.txt hola 0
+/opt/WorldOfGoo/res/fonts/wogBig.txt hola 0
+/opt/WorldOfGoo/res/fonts/wogSmall.txt hola 0
+/opt/WorldOfGoo/res/fonts/console.txt hola 0
+/opt/WorldOfGoo/eula.txt hola 0
+/opt/WorldOfGoo/linux-issues.txt hola 0
+/opt/WorldOfGoo/libs32/README.txt hola 0
+/opt/WorldOfGoo/libs64/README.txt hola 0
+/var/cache/dictionaries-common/ispell-dicts-list.txt hola 0
+/etc/X11/rgb.txt hola 0
+/etc/skel/.config/chromium/chrome_shutdown_ms.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold18.txt hola 0
+/boot/grub/gfxblacklist.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold52.txt hola 0
+/opt/WorldOfGoo/properties/config.txt hola 0
+/opt/WorldOfGoo/res/fonts/console.txt hola 0
+/opt/WorldOfGoo/res/fonts/wog150numbers.txt hola 0
+/opt/WorldOfGoo/res/fonts/wogSmall.txt hola 0
+/opt/WorldOfGoo/libs64/README.txt hola 0
+/opt/WorldOfGoo/libs32/README.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold36.txt hola 0
+/opt/WorldOfGoo/res/fonts/wogBig.txt hola 0
+/opt/WorldOfGoo/linux-issues.txt hola 0
+/opt/WorldOfGoo/eula.txt hola 0
+/opt/WorldOfGoo/res/fonts/TwCenMTCondensedExtraBold26.txt hola 0
+/var/cache/dictionaries-common/ispell-dicts-list.txt hola 0
+/home/katrin/.WorldOfGoo/LastRun.txt hola 0
+/home/katrin/.xchat2/scrollback/Linux Mint Server/.txt hola 0
+/home/katrin/.xchat2/scrollback/Linux Mint Server/#linuxmint-help.txt hola 0
+/home/katrin/.local/share/Trash/info/salida.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/test.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/Proyecto1.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salida.txt+.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaa.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat1.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat7.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/Proyecto1.3.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaet.3.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat6.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/asdf.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/txt.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/este.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaa.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaet.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/Proyecto1.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/texto.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/prueba.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salida.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salae.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat5.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/Proyecto1 1.0.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/texto2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat4.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/hola.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/descargar.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaf.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/palabras.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/file2.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaet.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salae.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/mat3.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/prueba.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/datos.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/salaf.2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/info/file2.txt.trashinfo hola 0
+/home/katrin/.local/share/Trash/files/P1-G11/LEEME.txt hola 0
+/home/katrin/.local/share/Trash/files/P1-G11/palabras.txt hola 47
+/home/katrin/.local/share/Trash/files/P1-G11/texto.txt hola 6
+/home/katrin/.local/share/Trash/files/mat1.txt hola 0
+/home/katrin/.local/share/Trash/files/salaf.txt hola 0
+/home/katrin/.local/share/Trash/files/gus09-10590/README.txt hola 0
+/home/katrin/.local/share/Trash/files/salida.2.txt hola 29
+/home/katrin/.local/share/Trash/files/mat3.txt hola 0
+/home/katrin/.local/share/Trash/files/palabras.txt hola 1
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/spanish/menu.txt hola 0
+/home/katrin/.local/share/Trash/files/asdf.txt hola 0
+/home/katrin/.local/share/Trash/files/test.txt hola 0
+/home/katrin/.local/share/Trash/files/mat5.txt hola 0
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/spanish/box.txt hola 0
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/spanish/msg.txt hola 0
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/english/menu.txt hola 0
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/english/msg.txt hola 0
+/home/katrin/.local/share/Trash/files/WinDS PRO/emu/no$gba/message/english/box.txt hola 0
+/home/katrin/.local/share/Trash/files/txt.txt hola 1
+/home/katrin/.local/share/Trash/files/CarpetaPrueba/notequieroborrar.txt hola 0
+/home/katrin/.local/share/Trash/files/RB_SD/RockBand/license-ogg.txt hola 0

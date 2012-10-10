@@ -1,0 +1,111 @@
+Sistemas de Operación CI-3825
+Autores: 
+-Katrin Bethencourt 09-10102
+-Gustavo Ortega 09-10590
+
+Proyecto 2.
+
+El archivo P2-G11.tar.gz contiene los siguientes archivos:
+
+funciones.c: Archivo que contiene la implementación de las funciones
+usadas en el archivo hilo.c.
+
+funciones.h: Archivo que contiene la declaración de las funciones
+implementadas en el archivo funciones.c.
+
+hilos.c: Archivo que contiene el main del programa, donde se maneja todo
+lo relacionado a la creación y ejecución de los procedimientos de los 
+hilos.
+
+LEEME.txt: Contiene el nombre de los archivos que vienen con el .tar.gz y una 
+breve descripcion de éstos, así como también el objetivo del programa, 
+como ejecutarlo y su estructura.
+
+makefile: Archivo que se usa para compilar el programa.
+
+El programa pargrep realiza una búsqueda concurrente de una palabra
+en diversos archivos con extensión .txt, a través de la creación de un 
+número de hilos, a los cuales se les pasa un archivo perteneciente al 
+directorio especificado, el cual deben abrir, y leer, para ejecutar la 
+búsqueda de la palabra. El proceso maestro es el encargado de leer el 
+directorio, y enviarle un archivo a cada hilo, hasta que ya no hayan más 
+archivos que procesar. De ser especificada la opción 
+-r, el maestro hace una lectura recursiva a partir del directorio base. 
+Una vez que el hilo haya finalizado la búsqueda, escribe en el archivo de 
+salida, especificado por el usuario, el archivo que analizó, la palabra 
+que buscó, y el número de veces que fue encontrada. Al finalizar el 
+procesamiento de todos los archivos, el proceso maestro imprime por 
+pantalla el directorio base, la palabra que se buscó, el número de hilos 
+empleados, y la ruta de cada archivo analizado. La comunicación entre el 
+proceso maestro y los hilos se realiza a través de memoria compartida.
+
+1) Ejecución:
+
+Para ejecutar el programa, primero se compila por medio del makefile
+contenido en la carpeta P2-G11, esto se hace ejecutando en la consola el
+comando "make". Luego, se ejecuta en la consola:
+./pargrep { -h | [-n i] [-r] [-d directorio] palabra salida }
+
+donde:
+-h (ayuda o help). Imprime un mensaje sencillo por pantalla indicando 
+cómo invocar el programa, qué significa cada opcion.
+
+-n i donde i es la cantidad de hilos a ser creados.
+
+-r indica que se desea hacer una búsqueda recursiva desde el directorio
+	base especificado.
+
+palabra: palabra que se desea buscar.
+
+salida: archivo que contendrá una línea por cada archivo analizado, junto 
+	con el número de veces que se encontró la palabra.
+
+{ A | B }: indica que se tienen dos opciones excluyentes para escoger,
+	la A o la B.
+
+Los parámetros especificados entre corchetes son opcionales:
+[-n i]: en caso de que no se especifique, se usará solo un hilo.
+
+[-d directorio]: en caso de no ser especificado, se usará el directorio
+	actual. Debe terminar con una barra. Ejemplo: /home/estudiante/
+
+Los parámetros de palabra y salida son obligatorios.
+
+2) Estructura:
+
+El programa contiene funciones para hacer su ejecución y estructuras para manejar
+los datos.
+
+*Funciones:
+
+comprobacion(): Es el procedimiento que verifica que los parámetros de entrada 
+sean correctos y que no haya error al introducirlos.
+
+buscar(): Procedimiento que busca en un archivo la palabra especificada, y
+retorna el número de veces que fue encontrada.
+
+comptxt(): Verifica si el archivo leido es de extensión .txt.
+
+ayuda(): Imprime la ayuda del programa.
+
+recursiva(): Función implementada dentro del main, que se emplea para hacer la
+búsqueda de la palabra en los archivos de manera recursiva.
+
+funhilo(): Es la función que ejecuta el hilo al ser creado. 
+
+*Estructuras:
+
+En el programa se usaron ciertas estructuras especiales para un mejor manejo del
+programa, tales como:
+
+-manejador: Es una estructura cuyos campos son "archivo", que es un arreglo 
+de caracteres, empleado para indicar la ruta del archivo donde se buscará 
+la palabra especificada; y un entero "nomas", que tendrá el valor 1 cuando ya no
+existan más palabras para buscar.
+
+-Arreglo de hilos: Es un arreglo dinámico de hilos, para poder identificar a cada
+uno, y así indicarles qué operaciones deben realizar.
+
+-Arreglo de estructura manejador: Es un arreglo dinámico de estructuras manejador,
+donde cada posición es una estructura relacionada con el hilo perteneciente al arreglo
+de hilos de mismo índice.
