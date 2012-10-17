@@ -21,7 +21,7 @@ typedef struct {
 int main(int argc, char *argv[])
 {
 	int sockfd, n;
-    struct sockaddr_in dirserv;
+	struct sockaddr_in dirserv;
     struct hostent *server;
     char buffer[256], archivo[50];
 	char *pal_archivo;
@@ -29,22 +29,20 @@ int main(int argc, char *argv[])
 	size_t len;
 	size_t read;
 	
+	proveedores ** datos;
+	/* "datos" es un arreglo de estructuras de tipo proveedor, inicializado
+	 * dinámicamente más adelante */
+	
 	*pal_archivo = NULL;
+	
+	
+	
 	/* Se comprueban los argumentos pasados */
 	comprobacion(argc, argv);
 	
 	/* Se obtiene del usuario el archivo con la informacion de los
-	 * proveedores y se guarda en archivo */
+	 * proveedores y se guarda en "archivo" */
 	strcpy(archivo, argv[5]);
-	
-	      
-    // Se crea el socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    
-    if (sockfd < 0) {
-       printf("ERROR opening socket");
-       exit(1);
-    }
 	
 	/* Se abre el archivo con la informacion de los proveedores para
 	 * conectarse a ellos */
@@ -60,6 +58,7 @@ int main(int argc, char *argv[])
 	
 	read = getdelim(&pal_archivo, &len, '&', fd);
 	
+	/* Se elimina el & */
 	if (pal_archivo[strlen(pal_archivo)-1] == '&')
 		pal_archivo[strlen(pal_archivo)-1] = '\0';
 		
@@ -84,6 +83,18 @@ int main(int argc, char *argv[])
 		
 	}
 	free(pal_archivo);
+	
+	
+	      
+    // Se crea el socket
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    
+    if (sockfd < 0) {
+       printf("ERROR opening socket");
+       exit(1);
+    }
+	
+	
 	
  
 	 
