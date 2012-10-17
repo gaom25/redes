@@ -16,34 +16,51 @@ typedef struct {
 	int numport;
 	int cantidad;
 	int precio;
-} proveedores;
+} proveedor;
 
 int main(int argc, char *argv[])
 {
-	int sockfd, n;
+	int sockfd, n, num, count, i;
 	struct sockaddr_in dirserv;
     struct hostent *server;
-    char buffer[256], archivo[50];
+    char buffer[256], archivo[70];
 	char *pal_archivo;
 	FILE *fd;
 	size_t len;
 	size_t read;
-	
-	proveedores ** datos;
+	proveedor ** datos;
 	/* "datos" es un arreglo de estructuras de tipo proveedor, inicializado
 	 * dinámicamente más adelante */
-	
-	*pal_archivo = NULL;
-	
-	
-	
+		
 	/* Se comprueban los argumentos pasados */
 	comprobacion(argc, argv);
 	
+	*pal_archivo = NULL;
+	count = 0;
+			
 	/* Se obtiene del usuario el archivo con la informacion de los
 	 * proveedores y se guarda en "archivo" */
 	strcpy(archivo, argv[5]);
 	
+	/* Se obtiene el numero de proveedores a contactar */
+	num = numlineas(archivo);
+	
+	/* Se inicializa el arreglo de estructuras de tipo proveedor, 
+	 * comprobando si se produjo un error al alocar memoria */
+	datos = (proveedor **) malloc(num * sizeof(proveedor *));
+	if (datos == NULL) {
+		printf("Error al alocar memoria, intente mas tarde\n");
+		exit(1);
+	}	
+	for(i = 0; i < num; i++){
+			datos[i] = (proveedor *) malloc(sizeof(proveedor));
+			if (datos[i] == NULL) {
+				printf("Error al alocar memoria, intente mas tarde\n");
+				exit(1);
+			}	
+	}
+	
+	i = 0;
 	/* Se abre el archivo con la informacion de los proveedores para
 	 * conectarse a ellos */
 	
@@ -58,29 +75,33 @@ int main(int argc, char *argv[])
 	
 	read = getdelim(&pal_archivo, &len, '&', fd);
 	
-	/* Se elimina el & */
+	/* Se elimina el & y se guarda el nombre del proveedor en la 
+	 * estructura */
 	if (pal_archivo[strlen(pal_archivo)-1] == '&')
 		pal_archivo[strlen(pal_archivo)-1] = '\0';
 		
 	 // !! Meter el nombre del proveedor en la estructura !!
-	 	
+	 strcpy(datos[i].nombre, pal_archivo);
+	 printf("Nombre del proveedor: %s\n", datos[i].nombre);	
 		
 	while((read = getdelim(&pal_archivo,&len,'&',fd))!= -1)
 	{
+		if (pal_archivo[strlen(pal_archivo)-1] == '&')
+			pal_archivo[strlen(pal_archivo)-1] = '\0';
+			
+		if (pal_archivo[strlen(pal_archivo)-1] == ' ')
+			pal_archivo[strlen(pal_archivo)-1] = '\0';
+			
+		if (pal_archivo[strlen(pal_archivo)-1] == '\n')
+			pal_archivo[strlen(pal_archivo)-1] = '\0';	
+			
+		memmove(pal_archivo, pal_archivo+1, strlen(pal_archivo));
 		
-			if (pal_archivo[strlen(pal_archivo)-1] == '&')
-				pal_archivo[strlen(pal_archivo)-1] = '\0';
-				
-			if (pal_archivo[strlen(pal_archivo)-1] == ' ')
-				pal_archivo[strlen(pal_archivo)-1] = '\0';
-				
-			if (pal_archivo[strlen(pal_archivo)-1] == '\n')
-				pal_archivo[strlen(pal_archivo)-1] = '\0';	
-				
-			memmove(pal_archivo, pal_archivo+1, strlen(pal_archivo));
-				
+		if (count == 0) {
+			strcpy(
+			
 		printf("%s3\n",pal_archivo);
-		
+
 	}
 	free(pal_archivo);
 	

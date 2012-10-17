@@ -4,3 +4,4 @@
 /************************************************/
 
 void comprobacion(int argc, char *argv[]);
+int numlineas(char arch[]);

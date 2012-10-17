@@ -53,3 +53,46 @@ void comprobacion(int argc, char *argv[])
 	}				
 
 }
+
+/****************************************************************/ 
+/* 					FUNCION: numlineas							*/
+/*																*/
+/* OBJETIVO: Contar el numero de lineas que tiene un archivo.	*/
+/*																*/
+/* PARAMETROS: Ruta del archivo.								*/
+/*																*/
+/* RETORNO: Entero con el numero de lineas.					 	*/
+/****************************************************************/
+
+int numlineas(char arch[])
+{
+	char archivo[70];
+	int n, status;
+	FILE *fd;
+	
+	strcpy(archivo, arch);
+	n = 0;
+	status = 0;
+	
+	fd = fopen(archivo, "r");
+	if (fd == NULL) {
+		printf("No se pudo abrir el archivo %s\n", archivo);
+		exit(1);
+	}
+	
+	while ( (status=fgetc(fd)) != EOF ) {
+        if (strcmp(status, '\n') == 0)
+            n++;
+    }
+	
+	return n;
+}		
+		
+	
+	
+	
+	
+	
+	
+	
+	
